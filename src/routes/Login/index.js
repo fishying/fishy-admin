@@ -20,8 +20,9 @@ class Login extends Component {
         axios({
             method: 'post',
             url: '/api/login',
+            headers: {'Content-Type': 'application/json'},
             data: {
-                name: username,
+                username: username,
                 password: password
             }
         })
@@ -37,7 +38,8 @@ class Login extends Component {
                     })
                 }
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 this.setState({loading: false})
             })
     }

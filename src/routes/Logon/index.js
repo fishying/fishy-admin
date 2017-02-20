@@ -18,11 +18,13 @@ class Login extends Component {
         this.setState({loading: true})
         let username = this.refs.username.refs.input.value
         let password = this.refs.password.refs.input.value
+        let email = this.refs.email.refs.input.value
         axios({
             method: 'post',
-            url: '/api/login',
+            url: '/api/register',
             data: {
-                name: username,
+                username: username,
+                email: email,
                 password: password
             }
         })
@@ -48,7 +50,7 @@ class Login extends Component {
                 <Log/>
                 <h2 className="title">注册</h2>
                 <Input size="large" placeholder="账号" ref="username" onPressEnter={this.handleClick}/>
-                <Input type="password" size="large" ref="password" placeholder="密码" onPressEnter={this.handleClick}/>
+                <Input size="large" placeholder="账号" ref="email" onPressEnter={this.handleClick}/>
                 <Input type="password" size="large" ref="password" placeholder="密码" onPressEnter={this.handleClick}/>
                 <Button type="ghost" onClick={this.handleClick} loading={this.state.loading}>Primary</Button>
             </div>
