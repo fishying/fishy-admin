@@ -1,10 +1,35 @@
 import axios from 'axios'
 
-export default {
-    index (page, limit) {
-        axios.get('/api/article')
-            .then(date => {
-                Promise.resolve(data.data)
+export function index (page, limit) {
+    return new Promise((resolve, reject) => {
+        axios.get('/api/article', {
+            params: {
+                page: page,
+                limit: limit
+            }
+        })
+            .then(data => {
+                resolve(data.data)
             })
-    }
+            .catch(e => {
+                reject(e)
+            })
+    })
+}
+
+export function article (slug, page, limit) {
+    return new Promise((resolve, reject) => {
+        axios.get(`/api/article/slug/${slug}`, {
+            params: {
+                page: page,
+                limit: limit
+            }
+        })
+            .then(data => {
+                resolve(data.data)
+            })
+            .catch(e => {
+                reject(e)
+            })
+    })
 }

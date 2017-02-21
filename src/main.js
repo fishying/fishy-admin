@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import Index from './routes/index/index.jsx'
+import Article from './routes/article/article.jsx'
 import tagList from './routes/tagList/tagList.jsx'
 
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
@@ -16,6 +17,7 @@ ReactDOM.render((
         <Route path="/" component={Default}>
             <IndexRoute component={Index}/>
             <Route path="tag" component={tagList}/>
+            <Route path="article/:slug" component={Article}/>
         </Route>
     </Router>
 ), document.getElementById('root'))

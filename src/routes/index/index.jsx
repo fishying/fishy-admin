@@ -1,55 +1,74 @@
 import React from 'react'
-import { Table, Icon } from 'antd'
-import api from '../../data/article'
-const columns = [{
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a href="#">{text}</a>,
-}, {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-}, {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-}]
+import { Table, Icon, Popconfirm, message } from 'antd'
 
-const data = [{
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-}, {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-}, {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-}]
+import { Link } from 'react-router'
+
+import { index } from '../../data/article'
+
+function onConfirm (id) {
+    message.info(id)
+}
+
+const columns = [
+    {
+        title: '标题',
+        dataIndex: 'title',
+        key: 'title',
+        render: (text, record) => <Link to={`/article/${record.slug}`}>{text}</Link>,
+    },
+    {
+        title: '时间',
+        dataIndex: 'create_at',
+        key: 'create_at',
+    },
+    {
+        title: '操作',
+        dataIndex: '',
+        key: 'x',
+        render: (text, record) =>
+            <Popconfirm title="确定要删除嘛?" okText="确定" cancelText="取消" onConfirm={onConfirm.bind(this, record._id)}>
+                <a href="#">Delete</a>
+            </Popconfirm>
+    }
+]
+
 export default class Default extends React.Component {
     constructor(props) {
         super(props)
+        this.onSelectChange = this.onSelectChange.bind(this)
         this.state = {
-            data: null,
-            loading: false
+            article: [],
+            selectedRowKeys: [],
+            loading: true
         }
-        api.index()
+    }
+    // component插入节点的阶段
+    componentDidMount () {
+        index()
             .then(e => {
-                this.state.data = e
+                this.setState({
+                    article: e.article,
+                    loading: false
+                })
             })
     }
+    onConfirm (id) {
+        console.log(id)
+    }
+    // 删除提示框
+    // 列表的选择函数
+    onSelectChange (selectedRowKeys) {
+        this.setState({selectedRowKeys})
+    }
     render(){
-        console.log(this.state.data)
+        const {selectedRowKeys, loading} = this.state
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        }
         return (
             <div>
-                <div>{this.state.data}</div>
-                <Table columns={columns} dataSource={data} />
+                <Table loading={loading} rowKey="_id" rowSelection={rowSelection} columns={columns} dataSource={this.state.article} pagination={false} />
             </div>
         )
     }
