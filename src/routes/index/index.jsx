@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Popconfirm, message } from 'antd'
+import { Table, Popconfirm, message } from 'antd'
 
 import { Link } from 'react-router'
 
@@ -36,40 +36,89 @@ export default class Default extends React.Component {
     constructor(props) {
         super(props)
         this.onSelectChange = this.onSelectChange.bind(this)
+        this.onPaging = this.onPaging.bind(this)
         this.state = {
-            article: [],
+            article: null,
             selectedRowKeys: [],
-            loading: true
+            loading: true,
+            meta: null
         }
     }
-    // component插入节点的阶段
+
     componentDidMount () {
         index()
             .then(e => {
                 this.setState({
                     article: e.article,
-                    loading: false
+                    loading: false,
+                    meta: e.meta
                 })
             })
     }
+
+    /**
+     * 删除提示框
+     * 
+     * @param {any} id 
+     * 
+     * @memberOf Default
+     */
     onConfirm (id) {
         console.log(id)
     }
-    // 删除提示框
-    // 列表的选择函数
+
+    /**
+     * 列表的选择函数
+     * 
+     * @param {any} selectedRowKeys 
+     * 
+     * @memberOf Default
+     */
+
     onSelectChange (selectedRowKeys) {
-        this.setState({selectedRowKeys})
+        this.setState({
+            selectedRowKeys
+        })
     }
+
+    onPaging (page) {
+        this.setState({
+            loading: true,
+        })
+        index(page)
+            .then(e => {
+                this.setState({
+                    article: e.article,
+                    loading: false,
+                    meta: e.meta
+                })
+            })
+    }
+
     render(){
-        const {selectedRowKeys, loading} = this.state
+        const {selectedRowKeys, loading, meta} = this.state
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,
         }
-        return (
+        return this.state.article ? (
             <div>
-                <Table loading={loading} rowKey="_id" rowSelection={rowSelection} columns={columns} dataSource={this.state.article} pagination={false} />
+                <Table
+                    loading={loading}
+                    rowKey="_id"
+                    rowSelection={rowSelection}
+                    columns={columns}
+                    dataSource={this.state.article}
+                    pagination={{
+                        defaultCurrent: 1,
+                        total: meta.article.total,
+                        defaultPageSize: 10,
+                        onChange: e => this.onPaging(e)
+                    }}
+                />
             </div>
+        ) : (
+            <div></div>
         )
     }
 }
