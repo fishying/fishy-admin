@@ -1,9 +1,21 @@
 import React from 'react'
-import { Layout, Menu, Icon } from 'antd'
+import { Layout, Menu, Icon, Dropdown } from 'antd'
 import { Link } from 'react-router'
 
 const { Header, Sider, Content, Footer } = Layout
 import './Default.css'
+
+
+const menu = (
+    <Menu>
+        <Menu.Item key="0">
+            <Link to="/new/article">
+                <Icon type="bars" />
+                <span className="nav-text">文章</span>
+            </Link>
+        </Menu.Item>
+    </Menu>
+)
 
 export default class Default extends React.Component {
     constructor (props) {
@@ -45,12 +57,19 @@ export default class Default extends React.Component {
                     </Menu>
                 </Sider>
                 <Layout style={{ background: '#fff' }}>
-                    <Header style={{ background: '#fff', padding: 0, borderBottom: '1px solid #e7e7e7' }}>
-                        <Icon
-                            className="trigger"
-                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                            onClick={this.toggle}
-                        />
+                    <Header style={{ background: '#fff', padding: 0, borderBottom: '1px solid #e7e7e7', position: 'relative' }}>
+                        <div className="left">
+                            <Icon
+                                className="trigger"
+                                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                                onClick={this.toggle}
+                            />
+                        </div>
+                        <div className="right">
+                            <Dropdown overlay={menu} trigger={['click']}>
+                                <Icon className="trigger" type="plus" />
+                            </Dropdown>
+                        </div>
                     </Header>
                     <Content style={{padding: 24,margin: 24, background: '#fff', position: 'relative' }}>
                         {this.props.children}

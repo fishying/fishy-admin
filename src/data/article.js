@@ -33,3 +33,32 @@ export function article (slug, page, limit) {
             })
     })
 }
+
+export function update (id, data) {
+    return new Promise((resolve, reject) => {
+        axios.put('/api/article', {
+            id: id,
+            data: data
+        })
+            .then(data => {
+                resolve(data.data)
+            })
+            .catch(e => {
+                reject(e)
+            })
+    })
+}
+
+export function add (data) {
+    return new Promise((resolve, reject) => {
+        axios.post('/api/article', {
+            data: data
+        })
+            .then(data => {
+                resolve(data.data)
+            })
+            .catch(e => {
+                reject(e)
+            })
+    })
+}
