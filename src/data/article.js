@@ -1,8 +1,7 @@
-import axios from 'axios'
-
+import axios from './index'
 export function index (page, limit) {
     return new Promise((resolve, reject) => {
-        axios.get('/api/article', {
+        axios.get('/api/admin/article', {
             params: {
                 page: page,
                 limit: limit
@@ -19,7 +18,7 @@ export function index (page, limit) {
 
 export function article (slug, page, limit) {
     return new Promise((resolve, reject) => {
-        axios.get(`/api/article/slug/${slug}`, {
+        axios.get(`/api/admin/article/slug/${slug}`, {
             params: {
                 page: page,
                 limit: limit

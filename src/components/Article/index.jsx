@@ -1,6 +1,5 @@
 import React from 'react'
-import { Input, Row, Col, Breadcrumb, Icon, Modal, Button, Tooltip, Select, message } from 'antd'
-import { Link } from 'react-router'
+import { Input, Row, Col, Icon, Modal, Button, Tooltip, Select, message, Switch } from 'antd'
 import { article, update, add } from '../../data/article'
 import { index as tagAll } from '../../data/tag'
 import { Map } from 'immutable'
@@ -66,14 +65,18 @@ export default class Article extends React.Component {
             })
     }
 
-    addArticle () {
-        add(this.state.article.toObject())
-            .then(e => {
-                message.success(e.message, 2)
-            })
-            .catch(e => {
-                console.log(e)
-            })
+    addArticle (value) {
+        this.setState({
+            article: this.state.article.set('enabled', value)
+        }, () => {
+            add(this.state.article.toObject())
+                .then(e => {
+                    message.success(e.message)
+                })
+                .catch(e => {
+                    message.error(e.message)
+                })
+        })
     }
 
     /**
@@ -85,8 +88,15 @@ export default class Article extends React.Component {
      * @memberOf Article
      */
     handleChange (e, type) {
+        let value
+        try {
+            value = e.target.value
+        } catch (y) {
+            value = e
+        }
+        
         this.setState({
-            article: this.state.article.set(type, e.target.value)
+            article: this.state.article.set(type, value)
         })
     }
 
@@ -176,13 +186,14 @@ export default class Article extends React.Component {
             {
                 name: 'tag',
                 tool: '标签'
+            },
+            {
+                name: 'enabled',
+                tool: '公开'
             }
         ]
         return article ? (
             <div>
-                <Breadcrumb style={{ position: 'absolute', top: '-12px' }}>
-                    <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-                </Breadcrumb>
                 <Icon
                     type="setting"
                     style={{ position: 'absolute', top: -12, right: 24, fontSize: 22, cursor: 'pointer' }}
@@ -219,6 +230,8 @@ export default class Article extends React.Component {
                                         >
                                             {this.createTag()}
                                         </Select>
+                                } else if (i.name === 'enabled') {
+                                    inputs = <Switch defaultChecked={article.get('enabled')} onChange={(e) => this.handleChange(e, i.name)} />
                                 } else {
                                     inputs = <Input {...this.createInput(i.name)}/>
                                 }
@@ -243,8 +256,8 @@ export default class Article extends React.Component {
                 {
                     this.props.new ? 
                     <div className="btn" style={{ marginTop: 14, }}>
-                        <Button type="primary" style={{ marginRight: 12 }} onClick={this.addArticle}>立即发布</Button>
-                        <Button type="danger">存为草稿</Button>
+                        <Button type="primary" style={{ marginRight: 12 }} onClick={() => this.addArticle(true)}>立即发布</Button>
+                        <Button type="danger" onClick={() => this.addArticle(false)}>存为草稿</Button>
                     </div>
                      : 
                     <div className="btn" style={{ marginTop: 14, }}>

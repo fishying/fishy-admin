@@ -1,7 +1,7 @@
 import React from 'react'
-import { Layout, Menu, Icon, Dropdown } from 'antd'
+import { Layout, Menu, Icon, Dropdown, Breadcrumb } from 'antd'
 import { Link } from 'react-router'
-
+const SubMenu = Menu.SubMenu
 const { Header, Sider, Content, Footer } = Layout
 import './Default.css'
 
@@ -22,7 +22,7 @@ export default class Default extends React.Component {
         super(props)
     }
     componentDidMount () {
-        console.log(this.props)
+        console.log(this)
     }
     state = {
         collapsed: false
@@ -54,6 +54,20 @@ export default class Default extends React.Component {
                                 <span className="nav-text">标签</span>
                             </Link>
                         </Menu.Item>
+                        <SubMenu key="sub1" title={<span><Icon type="setting" /><span>设置</span></span>}>
+                            <Menu.Item key="1">
+                                <Link to="/tag">
+                                    <Icon type="global" />
+                                    <span className="nav-text">网站</span>
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item key="2">
+                                <Link to="/tag">
+                                    <Icon type="user" />
+                                    <span className="nav-text">用户</span>
+                                </Link>
+                            </Menu.Item>
+                        </SubMenu>
                     </Menu>
                 </Sider>
                 <Layout style={{ background: '#fff' }}>
@@ -72,6 +86,7 @@ export default class Default extends React.Component {
                         </div>
                     </Header>
                     <Content style={{padding: 24,margin: 24, background: '#fff', position: 'relative' }}>
+                        <Breadcrumb routes={this.props.routes} params={this.props.params}  style={{ position: 'absolute', top: '-12px' }}/>
                         {this.props.children}
                     </Content>
                     <Footer style={{ textAlign: 'center', background: '#fff' }}>

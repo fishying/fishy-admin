@@ -15,11 +15,11 @@ import 'antd/dist/antd.css'
 
 ReactDOM.render((
     <Router history={browserHistory}>
-        <Route path="/" component={Default}>
+        <Route path="/" breadcrumbName="主页" component={Default}>
             <IndexRoute component={Index}/>
-            <Route path="tag" component={tagList}/>
-            <Route path="article/:slug" component={Article}/>
-            <Route path="new/article" component={newArticle}/>
+            <Route path="tag" breadcrumbName="所有标签"  component={tagList}/>
+            <Route path="article/:slug" breadcrumbName="文章：:slug"  component={Article}/>
+            <Route path="new/article" breadcrumbName="新建文章" component={newArticle}/>
         </Route>
     </Router>
 ), document.getElementById('root'))

@@ -17,9 +17,21 @@ const columns = [
         render: (text, record) => <Link to={`/article/${record.slug}`}>{text}</Link>,
     },
     {
+        title: '路径',
+        dataIndex: 'slug',
+        key: 'slug',
+        render: text => <span>/{text}</span>,
+    },
+    {
         title: '时间',
         dataIndex: 'create_at',
         key: 'create_at',
+    },
+    {
+        title: '公开',
+        dataIndex: 'enabled',
+        key: 'enabled',
+        render: text => <span>{'' + text}</span>,
     },
     {
         title: '操作',
@@ -53,6 +65,9 @@ export default class Default extends React.Component {
                     loading: false,
                     meta: e.meta
                 })
+            })
+            .catch(e => {
+                message.error(e.message)
             })
     }
 
@@ -92,6 +107,9 @@ export default class Default extends React.Component {
                     loading: false,
                     meta: e.meta
                 })
+            })
+            .catch(e => {
+                message.error(e.message)
             })
     }
 
