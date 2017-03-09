@@ -56,7 +56,7 @@ export default class Default extends React.Component {
                         </Menu.Item>
                         <SubMenu key="sub1" title={<span><Icon type="setting" /><span>设置</span></span>}>
                             <Menu.Item key="1">
-                                <Link to="/tag">
+                                <Link to="/setting/globel">
                                     <Icon type="global" />
                                     <span className="nav-text">网站</span>
                                 </Link>
