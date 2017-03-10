@@ -1,10 +1,9 @@
 import React from 'react'
 import { Input, Button, message } from 'antd'
 
-import { all, update } from 'data/setting'
+import { view, update } from 'data/user'
 
 import { Map } from 'immutable'
-
 export default class settingGloble extends React.Component {
     constructor (props) {
         super(props)
@@ -13,24 +12,24 @@ export default class settingGloble extends React.Component {
         this.updateSetting = this.updateSetting.bind(this)
 
         this.state = {
-            setting: null,
+            user: null,
             loading: false
         }
     }
 
     componentDidMount () {
-        all()
+        view()
             .then(e => {
                 console.log(e)
                 this.setState({
-                    setting: Map(e.setting)
+                    user: Map(e.user)
                 })
             })
     }
 
     handleChange (e, value) {
         this.setState({
-            setting: this.state.setting.set(value, e.target.value)
+            user: this.state.user.set(value, e.target.value)
         })
     }
 
@@ -38,7 +37,7 @@ export default class settingGloble extends React.Component {
         return (
             <lable key={id}>
                 <h2 className="title">{name}</h2>
-                <Input defaultValue={this.state.setting.get(id)} placeholder={name} onChange={e => this.handleChange(e, id)} />
+                <Input defaultValue={this.state.user.get(id)} placeholder={name} onChange={e => this.handleChange(e, id)} />
             </lable>
         )
     }
@@ -47,7 +46,7 @@ export default class settingGloble extends React.Component {
         this.setState({
             confirmLoading: true
         })
-        update(this.state.setting.get('_id'), this.state.setting.toObject())
+        update(this.state.user.toObject())
             .then(e => {
                 message.success(e.message)
                 this.setState({
@@ -57,31 +56,39 @@ export default class settingGloble extends React.Component {
     }
 
     render () {
-        let { setting, loading } = this.state 
+        let { user, loading } = this.state 
         let inputArr = [
             {
-                name: '网站标题',
-                id: 'title'
+                name: '用户名称（登陆名称）',
+                id: 'name'
             },
             {
-                name: '网站介绍',
+                name: '用户slug（网址）',
+                id: 'slug'
+            },
+            {
+                name: '用户介绍',
                 id: 'profile'
             },
             {
-                name: '网站url',
-                id: 'url'
+                name: '用户email',
+                id: 'email'
             },
             {
-                name: '网站logo',
-                id: 'logo'
+                name: '用户头像',
+                id: 'avatar'
             },
             {
-                name: '网站头图',
+                name: '用户头图',
                 id: 'cover'
+            },
+            {
+                name: 'website',
+                id: 'website'
             }
         ]
         return (
-            setting ? 
+            user ? 
             <div className="setting-globel">
                 {
                     inputArr.map(i => {

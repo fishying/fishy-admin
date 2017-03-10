@@ -21,9 +21,7 @@ export default class Default extends React.Component {
     constructor (props) {
         super(props)
     }
-    componentDidMount () {
-        console.log(this)
-    }
+
     state = {
         collapsed: false
     }
@@ -55,14 +53,14 @@ export default class Default extends React.Component {
                             </Link>
                         </Menu.Item>
                         <SubMenu key="sub1" title={<span><Icon type="setting" /><span>设置</span></span>}>
-                            <Menu.Item key="1">
+                            <Menu.Item key="/setting/globel">
                                 <Link to="/setting/globel">
                                     <Icon type="global" />
                                     <span className="nav-text">网站</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="2">
-                                <Link to="/tag">
+                            <Menu.Item key="/setting/user">
+                                <Link to="/setting/user">
                                     <Icon type="user" />
                                     <span className="nav-text">用户</span>
                                 </Link>

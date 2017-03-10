@@ -61,3 +61,19 @@ export function add (data) {
             })
     })
 }
+
+export function del (id) {
+    return new Promise((resolve, reject) => {
+        axios.delete('/api/article', {
+            data: {
+                id: id
+            }
+        })
+            .then(data => {
+                resolve(data.data)
+            })
+            .catch(e => {
+                reject(e)
+            })
+    })
+}

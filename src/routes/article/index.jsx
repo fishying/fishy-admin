@@ -1,5 +1,5 @@
 import React from 'react'
-import Article from '../../components/Article'
+import Article from 'components/Article'
 
 export default class Index extends React.Component {
     constructor (props) {

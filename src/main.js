@@ -7,6 +7,7 @@ import newArticle from './routes/newarticle'
 import tagList from './routes/tagList'
 
 import settingGlobel from './routes/settingGlobel'
+import settingUser from './routes/settingUser'
 
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import Default from './components/Default/Default.jsx'
@@ -23,6 +24,7 @@ ReactDOM.render((
             <Route path="article/:slug" breadcrumbName="文章：:slug"  component={Article}/>
             <Route path="new/article" breadcrumbName="新建文章" component={newArticle}/>
             <Route path="setting/globel" breadcrumbName="网站设置" component={settingGlobel}/>
+            <Route path="setting/user" breadcrumbName="用户设置" component={settingUser}/>
         </Route>
     </Router>
 ), document.getElementById('root'))

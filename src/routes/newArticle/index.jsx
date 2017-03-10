@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Article from '../../components/Article'
+import Article from 'components/Article'
 
 export default class newArticle extends React.Component {
     constructor (props) {

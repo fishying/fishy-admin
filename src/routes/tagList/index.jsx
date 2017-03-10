@@ -1,11 +1,41 @@
 import React from 'react'
-import { index } from '../../data/tag'
+import { index } from 'data/tag'
 
 import { Table, Popconfirm, message } from 'antd'
 
 import Modal from './modal.jsx'
 
 const { Column } = Table
+
+const columns = [
+    {
+        title: '名称',
+        dataIndex: 'name',
+        key: 'name'
+    },
+    {
+        title: '路径',
+        dataIndex: 'slug',
+        key: 'slug',
+        render: text => <span>/{text}</span>,
+    },
+    {
+        title: '文章个数',
+        dataIndex: 'count',
+        key: 'count',
+    },
+    {
+        title: '公开',
+        dataIndex: 'enabled',
+        key: 'enabled',
+        render: text => <span>{'' + text}</span>,
+    },
+    {
+        title: '操作',
+        dataIndex: 'x',
+        key: 'x'
+    }
+]
 
 export default class Default extends React.Component {
     constructor (props) {
@@ -87,7 +117,7 @@ export default class Default extends React.Component {
     render(){
         const {loading, tag, meta, visible, id} = this.state
 
-        return tag ? (
+        return tag ?
             <div>
                 <Table
                     dataSource={tag}
@@ -155,8 +185,12 @@ export default class Default extends React.Component {
                     ref="Modal"
                 ></Modal>
             </div>
-        ) : (
-            <div></div>
-        )
+        : 
+            <Table
+                dataSource={tag}
+                loading={loading}
+                columns={columns}
+            />
+        
     }
 }
