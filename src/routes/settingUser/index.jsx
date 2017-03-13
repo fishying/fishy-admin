@@ -68,7 +68,7 @@ export default class settingGloble extends React.Component {
             },
             {
                 name: '用户介绍',
-                id: 'profile'
+                id: 'description'
             },
             {
                 name: '用户email',

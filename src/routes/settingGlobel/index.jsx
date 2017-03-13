@@ -65,7 +65,7 @@ export default class settingGloble extends React.Component {
             },
             {
                 name: '网站介绍',
-                id: 'profile'
+                id: 'description'
             },
             {
                 name: '网站url',
@@ -78,6 +78,10 @@ export default class settingGloble extends React.Component {
             {
                 name: '网站头图',
                 id: 'cover'
+            },
+            {
+                name: '网站关键字',
+                id: 'keywords'
             }
         ]
         return (

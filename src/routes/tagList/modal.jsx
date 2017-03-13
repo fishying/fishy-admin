@@ -94,7 +94,7 @@ class tagModal extends React.Component {
                 tool: '名称'
             },
             {
-                name: 'profile',
+                name: 'description',
                 tool: '简介'
             },
             {

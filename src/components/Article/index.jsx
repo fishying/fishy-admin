@@ -1,12 +1,12 @@
 import React from 'react'
-import { Input, Row, Col, Icon, Modal, Button, Tooltip, Select, message, Switch } from 'antd'
+import { Input, Row, Col, Icon, Modal, Button, Tooltip, Select, message, Switch, DatePicker } from 'antd'
 import { article, update, add } from '../../data/article'
 import { index as tagAll } from '../../data/tag'
+import moment from 'moment'
 import { Map } from 'immutable'
 import SimpleMDE from 'react-simplemde-editor'
 
 const { Option } = Select
-
 
 import './md.css'
 import './index.less'
@@ -66,6 +66,7 @@ export default class Article extends React.Component {
     }
 
     addArticle (value) {
+        console.log(this.state.article.toObject())
         this.setState({
             article: this.state.article.set('enabled', value)
         }, () => {
@@ -140,7 +141,7 @@ export default class Article extends React.Component {
         tagAll()
             .then(e => {
                 this.setState({
-                    allTag: e.tag.map(e => e.name)
+                    allTag: e.tag ? e.tag.map(e => e.name) : []
                 })
             })
     }
@@ -177,21 +178,47 @@ export default class Article extends React.Component {
         let inputArr = [
             {
                 name: 'cover',
+                id: 'cover',
                 tool: '封面图'
             },
             {
                 name: 'slug',
+                id: 'slug',
                 tool: '地址'
             },
             {
                 name: 'tag',
+                id: 'tag',
                 tool: '标签'
             },
             {
+                name: 'time',
+                id: 'create_at',
+                tool: '时间'
+            },
+            {
                 name: 'enabled',
+                id: 'enabled',
                 tool: '公开'
             }
         ]
+        function range(start, end) {
+            const result = []
+            for (let i = start; i < end; i++) {
+                result.push(i)
+            }
+            return result
+        }
+        function disabledDate (current) {
+            return current > Date.now() && current
+        }
+        function disabledDateTime () {
+            return {
+                disabledHours: () => range(0, 60).splice(new Date().getHours() + 1, 24 - new Date().getHours()),
+                disabledMinutes: () => range(0, 60).splice(new Date().getMinutes() + 1, 60 - new Date().getMinutes()),
+                disabledSeconds: () => range(0, 60).splice(new Date().getSeconds() + 1, 60 - new Date().getSeconds())
+            }
+        }
         return article ? (
             <div>
                 <Icon
@@ -218,7 +245,7 @@ export default class Article extends React.Component {
                         {
                             inputArr.map((i) => {
                                 let inputs
-                                if (i.name === 'tag') {
+                                if (i.id === 'tag') {
                                     inputs = 
                                         <Select
                                             tags
@@ -230,13 +257,24 @@ export default class Article extends React.Component {
                                         >
                                             {this.createTag()}
                                         </Select>
-                                } else if (i.name === 'enabled') {
-                                    inputs = <Switch defaultChecked={article.get('enabled')} onChange={(e) => this.handleChange(e, i.name)} />
+                                } else if (i.id === 'enabled') {
+                                    inputs = <Switch defaultChecked={article.get('enabled')} onChange={(e) => this.handleChange(e, i.id)} />
+                                } else if (i.id === 'create_at') {
+                                    inputs = <DatePicker
+                                        showTime
+                                        disabledDate={disabledDate}
+                                        format="YYYY-MM-DD HH:mm:ss"
+                                        placeholder="Select Time"
+                                        onChange={(e) => this.handleChange(e, i.id)}
+                                        onOk={(e) => this.handleChange(e, i.id)}
+                                        defaultValue={moment(article.get(i.id))}
+                                        disabledTime={disabledDateTime}
+                                    />
                                 } else {
-                                    inputs = <Input {...this.createInput(i.name)}/>
+                                    inputs = <Input {...this.createInput(i.id)}/>
                                 }
                                 return (
-                                    <Row key={i.name} style={{ marginBottom: 12 }}>
+                                    <Row key={i.id} style={{ marginBottom: 12 }}>
                                         <Col span={4} 
                                             style={{ lineHeight: '28px', textAlign: 'right', padding: '0 12px' }}
                                         >
