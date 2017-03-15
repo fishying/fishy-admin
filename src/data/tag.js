@@ -31,7 +31,7 @@ export function one (id) {
 export function update (id, data) {
     return new Promise((resolve, reject) => {
         axios.put('/api/tag', {
-            // id: id,
+            id: id,
             data: data
         })
             .then(res => {
@@ -49,6 +49,22 @@ export function article (page, limit) {
             params: {
                 page: page,
                 limit: limit
+            }
+        })
+            .then(data => {
+                resolve(data.data)
+            })
+            .catch(e => {
+                reject(e)
+            })
+    })
+}
+
+export function del (id) {
+    return new Promise((resolve, reject) => {
+        axios.delete('/api/tag', {
+            data: {
+                id: id
             }
         })
             .then(data => {

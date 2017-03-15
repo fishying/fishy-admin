@@ -231,7 +231,8 @@ export default class Article extends React.Component {
                     value={article.get('md')}
                     onChange={this.updateCode}
                     options={{
-                        status: false
+                        status: false,
+                        spellChecker: false
                     }}
                 />
                 <Modal 

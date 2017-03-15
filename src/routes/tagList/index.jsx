@@ -1,5 +1,5 @@
 import React from 'react'
-import { index } from 'data/tag'
+import { index, del } from 'data/tag'
 
 import { Table, Popconfirm, message } from 'antd'
 
@@ -45,6 +45,7 @@ export default class Default extends React.Component {
         this.onConfirm = this.onConfirm.bind(this)
         this.onOk = this.onOk.bind(this)
         this.onCancel = this.onCancel.bind(this)
+        this.onIndex = this.onIndex.bind(this)
 
         this.state = {
             tag: null,
@@ -66,7 +67,6 @@ export default class Default extends React.Component {
         })
     }
     
-
     onPaging (page) {
         this.setState({
             loading: true,
@@ -80,9 +80,30 @@ export default class Default extends React.Component {
                 })
             })
     }
+    onIndex () {
+        this.setState({
+            loading: true
+        }, () => {
+            index()
+                .then(e => {
+                    this.setState({
+                        tag: e.tag,
+                        meta: e.meta,
+                        loading: false
+                    })
+                })
+        })
+    }
 
     onConfirm (id) {
-        message.info(id)
+        del(id)
+            .then(ctx => {
+                this.onIndex()
+                message.info(ctx.message)
+            })
+            .catch(msg => {
+                message.error(msg.message)
+            })
     }
 
     onSelectChange (selectedRowKeys) {
@@ -92,19 +113,14 @@ export default class Default extends React.Component {
     }
 
     componentDidMount () {
-        index()
-            .then(e => {
-                this.setState({
-                    tag: e.tag,
-                    meta: e.meta,
-                    loading: false
-                })
-            })
+        this.onIndex()
     }
 
     onOk () {
         this.setState({
             visible: false
+        }, () => {
+            this.onIndex()
         })
     }
 
