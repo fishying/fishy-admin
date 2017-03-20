@@ -46,6 +46,7 @@ export default class settingGloble extends React.Component {
         this.setState({
             confirmLoading: true
         })
+        console.log(this.state.user.toObject())
         update(this.state.user.toObject())
             .then(e => {
                 message.success(e.message)

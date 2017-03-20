@@ -38,7 +38,7 @@ export default class Default extends React.Component {
                     collapsible
                     collapsed={this.state.collapsed}
                 >
-                    <div className="logo" />
+                    <a href="/" className="logo" />
                     <Menu theme="dark" mode="inline" selectedKeys={[this.props.location.pathname]} defaultSelectedKeys={['/']}>
                         <Menu.Item key="/">
                             <Link to="/">

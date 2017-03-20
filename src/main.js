@@ -9,7 +9,7 @@ import tagList from './routes/tagList'
 import settingGlobel from './routes/settingGlobel'
 import settingUser from './routes/settingUser'
 
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import Default from './components/Default/Default.jsx'
 
 import './styles/main.less'
@@ -17,7 +17,7 @@ import './styles/main.less'
 import 'antd/dist/antd.css'
 
 ReactDOM.render((
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
         <Route path="/" breadcrumbName="主页" component={Default}>
             <IndexRoute component={Index}/>
             <Route path="tag" breadcrumbName="所有标签"  component={tagList}/>
