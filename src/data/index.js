@@ -8,6 +8,8 @@ axios.interceptors.response.use(function (config) {
         return Promise.reject(config.data)
     } else if (config.status === 404) {
         message.warn('获取数据失败，请刷新重试！', 5000)
+    } else if (config.status === 401) {
+        location.href = '/'
     } else {
         return config
     }
