@@ -1,0 +1,84 @@
+@import "~styles/var.less";
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 500;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    line-height: 1.5;
+    padding: 4px 15px;
+    font-size: 12px;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all .3s cubic-bezier(.645,.045,.355,1);
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    position: relative;
+    color: @G90;
+    background-color: transparent;
+    border-color: @G70;
+    &:focus, &:active {
+        outline: 0;
+    }
+    &:hover {
+        color: @B50;
+        border-color: @B50;
+    }
+    &:active {
+        color: @G90;
+        border-color: @G70;
+    }
+    &.t-btn-primary {
+        color: @G20;
+        background-color: @B50;
+        border-color: transparent;
+        &:hover {
+            background-color: @B30;
+        }
+        &:active {
+            background-color: @B80;
+        }
+    }
+    &.t-btn-dashed {
+        border-style: dashed;
+        color: @G90;
+        border-color: @G70;
+        &:hover {
+            color: @B50;
+            border-color: @B50;
+        }
+        &:active {
+            color: @G90;
+            border-color: @G70;
+        }
+    }
+    &.t-btn-danger {
+        color: @G20;
+        background-color: @R50;
+        border-color: transparent;
+        &:hover {
+            background-color: @R60;
+        }
+        &:active {
+            background-color: @R80;
+        }
+
+    }
+    &.t-btn-lg {
+        padding: 4px 15px 5px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+    &.t-btn-sm {
+        padding: 1px 7px;
+        font-size: 12px;
+        border-radius: 4px;
+    }
+}
