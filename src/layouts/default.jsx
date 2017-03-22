@@ -1,9 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router'
 import { Button, Layout, Menu } from 'components'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 export default class react extends React.Component {
     render () {
-        const { route } = this.props
-        
+        const { location } = this.props
+
         return (
             <div>
                 <Layout>
@@ -14,20 +16,22 @@ export default class react extends React.Component {
                     <Layout>
                         <Layout.Sider className="card" style={{ marginRight: '20px' }}>
                             <Menu
-                                defaultSelectedKeys={[route.name]}
+                                defaultSelectedKeys={[location.pathname]}
                             >
                                 <Menu.Group key="safdaf" title="列表" style={{ margin: '20px 0' }}>
-                                    <Menu.Item key="文章">
-                                        <a>文章</a>
+                                    <Menu.Item key="/">
+                                        <Link to="/">文章</Link>
                                     </Menu.Item>
-                                    <Menu.Item key="2">
-                                        <a>标签</a>
+                                    <Menu.Item key="/tag">
+                                        <Link to="/tag">标签</Link>
                                     </Menu.Item>
                                 </Menu.Group>
                             </Menu>
                         </Layout.Sider>
                         <Layout.Content className="card">
-                            { this.props.children }
+                            <ReactCSSTransitionGroup transitionName="example">
+                                { this.props.children }
+                            </ReactCSSTransitionGroup>
                         </Layout.Content>
                     </Layout>
                 </Layout>

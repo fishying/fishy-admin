@@ -116,9 +116,28 @@ input, select {
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.05);
 }
 .box {
-    margin: @margin3;
+    /*margin: @margin3;*/
+    display: flex;
     background: #fff;
     padding: @margin3;
     border-radius: @margin1;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+    transition: .3s box-shadow;
+    &:hover {
+        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.05);
+    }
+}
+.carousel1-enter {
+    opacity: 0;
+}
+.carousel1-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+.carousel1-leave {
+    opacity: 1;
+}
+.carousel1-leave-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
 }
