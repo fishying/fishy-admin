@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { Button, Layout, Menu } from 'components'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import Animate from 'rc-animate'
 export default class react extends React.Component {
     render () {
-        const { location } = this.props
+        const { location, children } = this.props
 
         return (
             <div>
@@ -28,10 +28,13 @@ export default class react extends React.Component {
                                 </Menu.Group>
                             </Menu>
                         </Layout.Sider>
-                        <Layout.Content className="card">
-                            <ReactCSSTransitionGroup transitionName="example">
-                                { this.props.children }
-                            </ReactCSSTransitionGroup>
+                        <Layout.Content>
+                            <Animate
+                                component="div"
+                                transitionName={'content-card'}
+                            >
+                                {React.cloneElement(children, { key: location.pathname })}
+                            </Animate>
                         </Layout.Content>
                     </Layout>
                 </Layout>

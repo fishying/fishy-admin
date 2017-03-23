@@ -13,6 +13,13 @@
 .layout-content {
     flex: auto;
     position: relative;
+    > div {
+        position: relative;
+        > div {
+            position: absolute;
+            width: 100%;
+        }
+    }
     h2.title {
         font-size: @h2;
         font-weight: 400;
@@ -20,7 +27,6 @@
         border-bottom: 1px solid fade(@G50, 80%);
         background: #fff;
     }
-    overflow: hidden;
 }
 .layout-header {
     position: relative;

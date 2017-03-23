@@ -1,9 +1,16 @@
 import React from 'react'
 import classNames from 'classnames'
 
-class Sider extends React.Component {
+export default class Sider extends React.Component {
     static __ANT_LAYOUT_SIDER = true
 
+    static propTypes = {
+        prefixCls: React.PropTypes.string
+    }
+
+    static defaultProps = {
+        prefixCls:  'layout-sider'
+    }
     constructor (props) {
         super(props)
     }
@@ -15,13 +22,3 @@ class Sider extends React.Component {
         )
     }
 }
-
-Sider.propTypes = {
-    prefixCls: React.PropTypes.string
-}
-
-Sider.defaultProps = {
-    prefixCls:  'layout-sider'
-}
-
-export default Sider

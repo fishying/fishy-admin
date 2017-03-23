@@ -1,4 +1,5 @@
 @import "var.less";
+@import "transition.less";
 /* 
 html5doctor.com Reset Stylesheet
 v1.4.1 
@@ -34,7 +35,7 @@ body, html {
     font-size: 14px;
     line-height: 1.42857143;
     color: @G100;
-    min-height: 100%;
+    height: 100%;
     background-color: @G30;
 }
 
@@ -126,18 +127,4 @@ input, select {
     &:hover {
         box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.05);
     }
-}
-.carousel1-enter {
-    opacity: 0;
-}
-.carousel1-enter-active {
-    opacity: 1;
-    transition: opacity 300ms ease-in;
-}
-.carousel1-leave {
-    opacity: 1;
-}
-.carousel1-leave-active {
-    opacity: 0;
-    transition: opacity 300ms ease-in;
 }

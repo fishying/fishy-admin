@@ -1,5 +1,5 @@
 import axios from './index'
-export function index (page, limit) {
+export function GetAll (page, limit) {
     return new Promise((resolve, reject) => {
         axios.post('/api/admin/article', {
             params: {
@@ -16,7 +16,7 @@ export function index (page, limit) {
     })
 }
 
-export function article (slug, page, limit) {
+export function Get (slug, page, limit) {
     return new Promise((resolve, reject) => {
         axios.post(`/api/admin/article/slug/${slug}`, {
             params: {

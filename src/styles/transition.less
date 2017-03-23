@@ -1,0 +1,24 @@
+.content-card {
+    &-enter,
+    &-leave-active {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+        transition-duration: 468ms;
+        transition-timing-function: ease-in-out;
+        transition-property: opacity, transform;
+    }
+
+    &-enter {
+        &-active {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            transition-duration: 368ms;
+            transition-delay: 150ms;
+            transition-timing-function: ease-in-out;
+            transition-property: opacity, transform;
+        }
+    }
+    &-leave-active {
+        transform: translate3d(0, -40px, 0);
+    }
+}
