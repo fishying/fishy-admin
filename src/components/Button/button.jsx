@@ -37,6 +37,6 @@ Button.propTypes = {
 Button.defaultProps = {
     type: '',
     size: '',
-    prefixCls:  't-btn'
+    prefixCls:  'btn'
 }
 export default Button

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Modal } from 'components'
+import { AddArticle } from 'components'
 import './style/main.less'
+import { Modal } from 'components'
 import { GetAll } from 'data/article'
 import classNames from 'classnames'
 import moment from 'moment'
@@ -32,7 +33,6 @@ export default class List extends Component {
         const { article } = this.props
         if (article.length) {
             return article.map(art => {
-                console.log(art.tag)
                 let classs = classNames('box', {
                     enabled: !art.enabled
                 }, 'card')
@@ -68,7 +68,7 @@ export default class List extends Component {
             })
         } else {
             return (
-                <div className="no-more">
+                <div className="no-more card">
                     <i className="icon ion-filing"></i>
                     <p className="text">Null</p>
                 </div>
@@ -84,7 +84,7 @@ export default class List extends Component {
                     visible={this.state.visible}
                     onClose={() => {this.setState({visible: false})}}
                 >
-                    <div onClick={() => {this.setState({visible: false})}}>test</div>
+                    <AddArticle onClose={() => {this.setState({visible: false})}}/>
                 </Modal.View>
             </article>
         )

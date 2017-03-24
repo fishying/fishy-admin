@@ -3,9 +3,12 @@ import { Button, Layout, Menu, ArticleList } from 'components'
 export default class react extends React.Component {
     render () {
         return (
-            <div className="card">
-                <h2 className="title">标签</h2>
-                <ArticleList />
+            <div>
+                <div className="card">
+                    <h2 className="title">文章</h2>
+                </div>
+                <ArticleList/>
+                <div className="list-dian"></div>
             </div>
         )
     }
