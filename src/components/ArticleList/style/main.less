@@ -1,12 +1,53 @@
 @import "~styles/var.less";
 
 article.list {
-    background: #f7f7f7;
-    padding: @margin3;
+    margin-top: @margin3;
     .box {
         margin-bottom: @margin3;
+        border-left: @margin1 solid @B50;
+        cursor: pointer;
+        display: flex;
+        background: #fff;
+        padding: @margin3;
+        border-radius: @margin1;
+        transition: .3s box-shadow;
+        &:hover {
+            box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.05);
+        }
         &:last-child {
             margin-bottom: 0;
+        }
+        &.enabled {
+        border-left: @margin1 solid @R50;
+        }
+        .article {
+            .title {
+                font-size: @margin3;
+            }
+            .info {
+                display: flex;
+                .time {
+                    font-size: 12px;
+                    color: @G80;
+                    line-height: 22px;
+                    margin-right: @margin4;
+                    i.icon {
+                        margin-right: @margin1;
+                    }
+                }
+                .tag {
+                    font-size: 12px;
+                    color: @G80;
+                    line-height: 22px;
+                    margin-right: @margin4;
+                    i.icon {
+                        margin-right: @margin1;
+                    }
+                    span {
+                        margin-left: @margin1;
+                    }
+                }
+            }
         }
     }
 }

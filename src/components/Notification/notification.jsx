@@ -1,24 +1,44 @@
 import React from 'react'
 import Notify from './notify'
 import ReactDOM from 'react-dom'
+const PropTypes = React.PropTypes
+import Animate from 'rc-animate'
 
 const info = ['success', 'info', 'warning', 'error']
+
 let seed = 0
 const now = Date.now()
 var properties = null
 class Notification extends React.Component {
     static propTypes = {
-        prefixCls: React.PropTypes.string
+        prefixCls: PropTypes.string,
+        style: PropTypes.object,
+        onClose: PropTypes.func
     }
     static defaultProps = {
-        prefixCls: 't-notification'
+        prefixCls: 'notification',
+        style: {
+            bottom: 20,
+            left: 20
+        },
+        onClose: () => {}
     }
 
     constructor (props) {
         super(props)
+        this.remove = this.remove.bind(this)
         this.state = {
             notifysArr: []
         }
+    }
+    
+    remove (key) {
+        this.setState(State => {
+            return {
+                notifysArr: State.notifysArr.filter(notify => notify.key !== key),
+            }
+        })
+        this.props.onClose()
     }
 
     add (prop) {
@@ -36,16 +56,21 @@ class Notification extends React.Component {
     }
 
     render () {
-        const { prefixCls } = this.props
+        const { prefixCls, style } = this.props
         const { notifysArr } = this.state
         const Notifys = notifysArr.map(notify => {
             return (
-                <Notify {...notify} {...this.props}/>
+                <Notify {...notify} onClose={() => this.remove(notify.key)} prefixCls={prefixCls}/>
             )
         })
         return (
-            <div className={`${prefixCls}`}>
-                { Notifys }
+            <div className={`${prefixCls}`} style={style}>
+                <Animate
+                    component="div"
+                    transitionName={'notify'}
+                >
+                    { Notifys }
+                </Animate>
             </div>
         )
     }

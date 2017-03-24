@@ -1,0 +1,66 @@
+@import "~styles/var.less";
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    &-mask {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: fade(@G100, 50%);
+        height: 100%;
+        width: 100%;
+        z-index: 1000;
+    }
+    &-wrap {
+        width: 600px;
+        max-height: 500px;
+        padding: @margin4 0;
+        z-index: 1001;
+    }
+    &-content {
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.09);
+        border-radius: 5px;
+        overflow: auto;
+    }
+    &-header {
+        border-bottom: 1px solid @G50;
+        padding: @margin3;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-icon.ion-android-close {
+        cursor: pointer;
+        font-size: @h3;
+    }
+}
+.modal-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    z-index: 998;
+    &-wrap {
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+    }
+}

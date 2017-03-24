@@ -1,14 +1,14 @@
 @import "~styles/var.less";
 
-.t-notification {
+.notification {
     position: fixed;
     &-notify {
         width: 300px;
         padding: @margin3;
         background: #fff;
         box-shadow: 0 0px 12px 0 rgba(0, 0, 0, 0.05);
-        border-radius: @margin1;
-        border-left: 4px solid;
+        border-radius: @margin1 - 2;
+        border-left: @margin1 solid;
         margin-bottom: @margin3;
         position: relative;
     }
@@ -20,6 +20,7 @@
         }
     }
     &-icon-close {
+        cursor: pointer;
         position: absolute;
         right: @margin3;
         top: @margin3;
