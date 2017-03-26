@@ -16,11 +16,13 @@ export default class Model extends Component {
 
     static defaultProps = {
         prefixCls: 'modal',
-        visible: false
+        visible: false,
+        onClose: () => {}
     }
     constructor (props) {
         super(props)
         this.onClose = this.onClose.bind(this)
+        this.onKeyClose = this.onKeyClose.bind(this)
     }
 
     componentDidUpdate () {

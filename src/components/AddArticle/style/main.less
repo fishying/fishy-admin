@@ -3,7 +3,7 @@
 .article-post {
     max-width: 620px;
     padding: 0 @margin3;
-    margin: @margin3 + 62px auto 0 auto;
+    margin: @margin3 auto 0 auto;
     .close {
         position: absolute;
         right: @margin3 * 2;
@@ -13,6 +13,7 @@
             color: @G90;
             font-size: 32px;
             line-height: 18px;
+            margin-left: @margin3;
         }
     }
     .container {
@@ -40,6 +41,17 @@
                 color: @G100;
             }
         }
+        .md {
+            margin-top: @margin3;
+            textarea {
+                min-width: 100%;
+                max-width: 100%;
+                min-height: 440px;
+                border: none;
+                outline: none;
+                color: @G100;
+            }
+        }
         .editor-toolbar {
             margin-top: @margin3;
             border: none;
@@ -57,37 +69,6 @@
             &-scroll {
                 min-height: 800px;
             }
-        }
-    }
-    header.article {
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        min-height: 62px;
-        width: 100%;
-        border-top: 1px solid @G50;
-        z-index: 999;
-        background: @G20;
-        padding: @margin3;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        .content {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .settings {
-            margin-right: @margin3;
-            font-size: 20px;
-            color: @G100;
-        }
-        .push {
-            color: #00ab6b;
         }
     }
 }

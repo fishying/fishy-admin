@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SimpleMDE from 'react-simplemde-editor'
 import './style/main.less'
-import { Button } from 'components'
+import { Button, Modal } from 'components'
 const PropTypes = React.PropTypes
 
 export default class AddArticle extends Component {
@@ -14,26 +14,42 @@ export default class AddArticle extends Component {
         onClose: () => {},
         visible: false
     }
+
     constructor (props) {
         super(props)
         this.mdChange = this.mdChange.bind(this)
+        this.closeSetting = this.closeSetting.bind(this)
+        this.openSetting = this.openSetting.bind(this)
+        this.state = {
+            settingVis: false
+        }
     }
+
     mdChange () {
 
     }
+    
+    openSetting () {
+        console.log(1)
+        this.setState({
+            settingVis: true
+        })
+    }
+    
+    closeSetting () {
+        this.setState({
+            settingVis: false
+        })
+    }
+
     render () {
         const { visible, onClose } = this.props
+        const { settingVis } = this.state
+        const { openSetting, closeSetting } = this
         return (
             <div className="article-post">
-                <header className="article">
-                    <div className="content">
-                        <span className="settings">
-                            <i className="icon ion-ios-gear"></i>
-                        </span>
-                        <span className="push">发布</span>
-                    </div>
-                </header>
                 <div className="close">
+                    <i className="icon ion-android-more-horizontal" onClick={openSetting}></i>
                     <i className="icon ion-android-close" onClick={onClose}></i>
                 </div>
                 <div className="container">
@@ -44,16 +60,15 @@ export default class AddArticle extends Component {
                         <input type="text" placeholder="文章标题"/>
                     </div>
                     <div className="md">
-                        <SimpleMDE
-                            value="test"
-                            onChange={this.mdChange}
-                            options={{
-                                status: false,
-                                spellChecker: false
-                            }}
-                        />
+                        <textarea placeholder="文章内容" className="md" name="" id="" cols="30"></textarea>
                     </div>
                 </div>
+                <Modal
+                    visible={settingVis}
+                    onClose={closeSetting}
+                >
+                    test
+                </Modal>
             </div>
         )
     }
