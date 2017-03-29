@@ -53,6 +53,7 @@
     "ora": "^0.3.0",
     "postcss-loader": "^0.13.0",
     "rc-animate": "^2.3.3",
+    "rc-trigger": "^1.9.1",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-update": "^15.4.2",
     "react-dom": "^15.3.1",
@@ -70,7 +71,6 @@
     "webpack-merge": "^0.14.1"
   },
   "dependencies": {
-    "antd": "^2.5.3",
     "axios": "^0.15.3",
     "react": "^15.3.1",
     "react-router": "^3.0.0"

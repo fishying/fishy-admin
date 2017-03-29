@@ -18,15 +18,18 @@ export default class List extends Component {
     constructor (props) {
         super(props)
         this.articleList = this.articleList.bind(this)
+        this.openSetting = this.openSetting.bind(this)
         this.state = {
-            visible: false
+            visible: false,
+            id: null
         }
     }
-    componentWillMount () {
-        /*GetAll()
-            .then(e => {
-                console.log(e)
-            })*/
+
+    openSetting (id) {
+        this.setState({
+            visible: true,
+            id: id
+        })
     }
 
     articleList () {
@@ -37,7 +40,7 @@ export default class List extends Component {
                     enabled: !art.enabled
                 }, 'card')
                 return (
-                    <div className={classs} key={art._id} onClick={() => {this.setState({visible: true})}}>
+                    <div className={classs} key={art._id} onClick={() => {this.openSetting(art._id)}}>
                         <div className="article">
                             <p className="title">{ art.title }</p>
                             <div className="info">
@@ -77,15 +80,11 @@ export default class List extends Component {
     }
 
     render () {
+        const { id } = this.state
         return (
             <article className="list">
                 { this.articleList() }
-                <Modal.View
-                    visible={this.state.visible}
-                    onClose={() => {this.setState({visible: false})}}
-                >
-                    <AddArticle onClose={() => {this.setState({visible: false})}}/>
-                </Modal.View>
+                <AddArticle visible={this.state.visible} id={id} onClose={() => {this.setState({visible: false})}}/>
             </article>
         )
     }

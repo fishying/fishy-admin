@@ -4,19 +4,67 @@
     max-width: 620px;
     padding: 0 @margin3;
     margin: @margin3 auto 0 auto;
-    .close {
-        position: absolute;
-        right: @margin3 * 2;
-        top: @margin3 * 2;
-        .icon {
-            cursor: pointer;
-            color: @G90;
-            font-size: 32px;
-            line-height: 18px;
-            margin-left: @margin3;
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        & .left, & .right {
+            position: absolute;
+            top: @margin3;
+            .icon {
+                cursor: pointer;
+                color: @G90;
+            }
+        }
+        & .left {
+            left: @margin3;
+            .icon {
+                margin-right: @margin3;
+                font-size: 22px;
+            }
+        }
+        & .right {
+            right: @margin3;
+            .icon {
+                margin-left: @margin3;
+                font-size: 22px;
+            }
+        }
+        .article-info {
+            max-width: 620px;
+            padding: 60px 16px 0 16px;
+            margin: 0 auto 0 auto;
+            background: #fff;
+            .info {
+                border-bottom: 1px solid @G30;
+                padding: @margin1 0;
+                .tag {
+                    .icon {
+                        color: @G90;
+                    }
+                    input[type=text] {
+                        border: none;
+                        outline: none;
+                        margin-left: 12px;
+                    }
+                }
+            }
+            .title {
+                margin-top: @margin2;
+                padding: @margin2 0;
+                input[type=text] {
+                    font-size: @h2;
+                    outline: none;
+                    width: 100%;
+                    border: none;
+                    color: @G100;
+                }
+            }
         }
     }
     .container {
+        margin-top: 140px;
         .cover {
             width: 100%;
             min-height:120px;
@@ -24,12 +72,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            .icon {
-                &.ion-image {
-                    font-size: 62px;
-                    color: @G50;
-                }
-            }
         }
         .title {
             margin-top: @margin3;

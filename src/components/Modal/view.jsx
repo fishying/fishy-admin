@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { RenderInBody } from '../index'
 import Animate from 'rc-animate'
 import './style/main.less'
+import classNames from 'classnames'
 
 const PropTypes = React.PropTypes
 export default class Model extends Component {
@@ -26,6 +27,12 @@ export default class Model extends Component {
             visible: this.props.visible
         }
     }
+    componentDidUpdate (state) {
+        if (this.props.visible && this.props.visible !== state.visible) {
+            this.onOk()
+        }
+    }
+    /*
     componentDidUpdate () {
         const props = this.props
         if (props.visible) {
@@ -34,6 +41,7 @@ export default class Model extends Component {
             document.removeEventListener('keydown', this.onKeyClose)
         }
     }
+    */
     onKeyClose (e) {
         if (e.keyCode && e.keyCode === 27 ) {
             this.onClose()
@@ -48,11 +56,12 @@ export default class Model extends Component {
     }
 
     render () {
-        const { prefixCls, children, title, visible } = this.props
+        const { prefixCls, children, title, visible, className } = this.props
+        let classnames = classNames(prefixCls, className)
         let content
         if (visible) {
             content = (
-                <div className={prefixCls} ref="wrap">
+                <div className={classnames} ref="wrap">
                     <div className={`${prefixCls}-wrap thin-scroll`}>
                         { children }
                     </div>

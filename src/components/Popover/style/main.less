@@ -1,0 +1,21 @@
+@import "~styles/var.less";
+.popover {
+    background: #fff;
+    z-index: 9999;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    width: 120px;
+    border-radius: @margin1;
+    ul {
+        list-style: none;
+        li {
+            padding: @margin2;
+            color: @G90;
+            &:hover {
+                background: fade(@B10, 30%);
+            }
+        }
+    }
+    &-hidden {
+        display: none;
+    }
+}

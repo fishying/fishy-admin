@@ -16,9 +16,9 @@ export function GetAll (page, limit) {
     })
 }
 
-export function Get (slug, page, limit) {
+export function Get (id, page, limit) {
     return new Promise((resolve, reject) => {
-        axios.post(`/api/admin/article/slug/${slug}`, {
+        axios.post(`/api/admin/article/${id}`, {
             params: {
                 page: page,
                 limit: limit

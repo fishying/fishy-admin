@@ -24,7 +24,7 @@ export default class Model extends Component {
         this.onClose = this.onClose.bind(this)
         this.onKeyClose = this.onKeyClose.bind(this)
     }
-
+    /*
     componentDidUpdate () {
         const props = this.props
         if (props.visible) {
@@ -33,7 +33,7 @@ export default class Model extends Component {
             document.removeEventListener('keydown', this.onKeyClose)
         }
     }
-
+    */
     onKeyClose (e) {
         if (e.keyCode && e.keyCode === 27 ) {
             this.onClose()
