@@ -17,16 +17,20 @@ export default class AddArticle extends Component {
 
     constructor (props) {
         super(props)
+
         this.closeSetting = this.closeSetting.bind(this)
         this.openSetting = this.openSetting.bind(this)
         this.initSetting = this.initSetting.bind(this)
         this.getArticle = this.getArticle.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.onClose = this.onClose.bind(this)
+        this.saveArticle = this.saveArticle.bind(this)
+
         this.state = {
             settingVis: false,
             article: Map({}),
-            defaultProps: []
+            defaultProps: [],
+            defaultTag: ''
         }
     }
     
@@ -39,7 +43,7 @@ export default class AddArticle extends Component {
             .then(e => {
                 this.setState({
                     article: Map({...e.article}),
-                    defaultTag: e.article.tag.length > 0 ? e.article.tag.map(e => e.name) : []
+                    defaultTag: e.article.tag.length > 0 ? e.article.tag.map(e => e.name).join(',') : []
                 })
             })
     }
@@ -64,35 +68,55 @@ export default class AddArticle extends Component {
     }
 
     handleChange (e, type) {
-        this.setState({
-            article: this.state.article.set(type, e.target.value)
-        })
+        if (type === 'defaultTag') {
+            this.setState({
+                [type]: e.target.value
+            })
+        } else {
+            this.setState({
+                article: this.state.article.set(type, e.target.value)
+            })
+        }
     }
     onClose () {
         this.props.onClose()
         this.close()
     }
+
     initSetting () {
         const { settingVis } = this.state
         return (
             <Modal.View
-                className="test"
+                className="modal-article-setting"
                 visible={settingVis}
                 onClose={() => {this.setState({settingVis: false})}}
             >
-                test
+                <div onClick={() => {this.setState({settingVis: false})}}>test</div>
             </Modal.View>
         )
     }
 
+    saveArticle () {
+        let { article, defaultTag } = this.state
+        let tag = defaultTag
+            .split(',')
+            .map(e => e.replace(/\s/g, ''))
+            .filter(e => e.length > 0)
+        console.log(tag)
+        this.setState({
+            article: article.set('tag', tag)
+        }, () => {
+            console.log(article.toObject())
+        })
+    }
+
     render () {
         const { visible } = this.props
-        const { settingVis, article } = this.state
-        const { initSetting, getArticle, onClose } = this
+        const { settingVis, article, defaultTag } = this.state
+        const { initSetting, getArticle, onClose, saveArticle } = this
         let popup = (
             <ul>
-                <li>发布</li>
-                <li>保存</li>
+                <li onClick={saveArticle}>保存</li>
             </ul>
         )
         return (
@@ -111,11 +135,11 @@ export default class AddArticle extends Component {
                             <div className="info">
                                 <div className="tag">
                                     <i className="icon ion-ios-pricetag"></i>
-                                    <input placeholder="用,隔开" type="text" className="text"/>
+                                    <input value={defaultTag} type="text" onChange={e => this.handleChange(e, 'defaultTag')} placeholder="用,隔开" className="text"/>
                                 </div>
                             </div>
                             <div className="title">
-                                <input value={article.get('title')} type="text" onChange={e => this.handleChange(e, 'title')}  placeholder="文章标题"/>
+                                <input value={article.get('title')} onChange={e => this.handleChange(e, 'title')}  placeholder="文章标题"/>
                             </div>
                         </div>
                         <div className="right">
