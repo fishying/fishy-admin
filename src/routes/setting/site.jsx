@@ -18,20 +18,30 @@ export default class Site extends Component {
         super(props)
 
         this.handleChange = this.handleChange.bind(this)
+        this.putArticle = this.putArticle.bind(this)
 
         this.state = {
             setting: Map({...settingDefault})
         }
     }
     componentWillMount () {
+        let setting = {}
         Get()
             .then(msg => {
                 Object.keys(msg.setting).forEach(type => {
-                    msg.setting[type] = msg.setting[type] === null ? '' : msg.setting[type]
+                    setting[type] = msg.setting[type] === null ? '' : msg.setting[type]
                 })
                 this.setState({
-                    setting: Map({...msg.setting})
+                    setting: Map({...setting})
                 })
+            })
+    }
+
+    putArticle () {
+        const { setting } = this.state
+        Put(setting.get('_id'), setting.toObject())
+            .then(msg => {
+                console.log(msg)
             })
     }
 
@@ -49,6 +59,7 @@ export default class Site extends Component {
 
     render () {
         const { setting } = this.state
+        const { putArticle } = this
         return (
             <div>
                 <div className="card title">
@@ -58,6 +69,7 @@ export default class Site extends Component {
                     <lable>
                         <p className="title">网站图片：</p>
                         <input
+                            type="text"
                             value={setting.get('cover')}
                             onChange={e => { this.handleChange(e.target.value, 'cover') }}
                         />
@@ -65,6 +77,7 @@ export default class Site extends Component {
                     <lable>
                         <p className="title">网站标题：</p>
                         <input
+                            type="text"
                             value={setting.get('title')}
                             onChange={e => { this.handleChange(e.target.value, 'title') }}
                         />
@@ -79,12 +92,13 @@ export default class Site extends Component {
                     <lable>
                         <p className="title">网站logo：</p>
                         <input
+                            type="text"
                             value={setting.get('logo')}
                             onChange={e => { this.handleChange(e.target.value, 'logo') }}
                         />
                     </lable>
                     <div className="btns">
-                        <Button>更新</Button>
+                        <Button onClick={ putArticle }>更新</Button>
                     </div>
                 </div>
             </div>
