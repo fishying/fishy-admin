@@ -16,14 +16,14 @@ class Button extends React.Component {
         super(props)
     }
     render () {
-        const {type, size, prefixCls} = this.props
+        const {type, size, prefixCls, onClick} = this.props
         const context = <span>{trim(this.props.children)}</span>
         const className = classnames(prefixCls, {
             [`${prefixCls}-${type}`]: type,
             [`${prefixCls}-${size}`]: size
         })
         return (
-            <button className={className}>{context}</button>
+            <button className={className} onClick={ onClick }>{context}</button>
         )
     }
 }
@@ -37,6 +37,7 @@ Button.propTypes = {
 Button.defaultProps = {
     type: '',
     size: '',
-    prefixCls:  'btn'
+    prefixCls:  'btn',
+    onClick: () => {}
 }
 export default Button

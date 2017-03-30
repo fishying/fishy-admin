@@ -40,10 +40,12 @@
                 border-bottom: 1px solid @G30;
                 padding: @margin1 0;
                 .tag {
+                    line-height: 24px;
                     .icon {
                         color: @G90;
                     }
                     input[type=text] {
+                        line-height: 24px;
                         border: none;
                         outline: none;
                         margin-left: 12px;
@@ -114,6 +116,57 @@
         }
     }
 }
-.modal-view.modal-article-setting {
-    background: rgba(255, 255, 255, 0.96);
+.modal-view.modal-article-info {
+    background: rgba(255, 255, 255, 0.94);
+    .article-info {
+        width: 440px;
+        margin: auto;
+        header {
+            width: 100%;
+            margin: 24px auto;
+            margin-bottom: 42px;
+            padding-bottom: 24px;
+            text-align: center;
+            border-bottom: 1px solid @G50;
+            .icon {
+                font-size: 5em;
+                color: @G80;
+            }
+            p.title {
+                font-size: 2.4em;
+                color: @G90;
+            }
+        }
+        .content {
+            margin-bottom: @margin6;
+            .list {
+                line-height: 24px;
+                margin-bottom: 24px;
+                display: flex;
+                align-items: center;
+                .lab {
+                    flex: 0 1 140px;
+                    color: @G90;
+                    font-size: 1.4em;
+                }
+                .info {
+                    flex: 1 1 auto;
+                    font-size: 1.4em;
+                    input[type=text] {
+                        border: 1px solid @G70;
+                        border-radius: @margin1;
+                        outline: none;
+                        padding: .6em .8em;
+                    }
+                }
+            }
+        }
+        .btn-group {
+            text-align: center;
+            button {
+                font-size: 1.2em;
+                margin: 0 @margin2;
+            }
+        }
+    }
 }

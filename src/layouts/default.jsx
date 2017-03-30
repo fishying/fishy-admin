@@ -18,12 +18,20 @@ export default class react extends React.Component {
                             <Menu
                                 defaultSelectedKeys={[location.pathname]}
                             >
-                                <Menu.Group key="safdaf" title="列表" style={{ margin: '20px 0' }}>
+                                <Menu.Group key="list" title="列表" style={{ margin: '20px 0' }}>
                                     <Menu.Item key="/">
                                         <Link to="/">文章</Link>
                                     </Menu.Item>
                                     <Menu.Item key="/tag">
                                         <Link to="/tag">标签</Link>
+                                    </Menu.Item>
+                                </Menu.Group>
+                                <Menu.Group key="safdaf" title="设置" style={{ margin: '20px 0' }}>
+                                    <Menu.Item key="/setting/site">
+                                        <Link to="/setting/site">网站</Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="/setting/user">
+                                        <Link to="/setting/user">用户</Link>
                                     </Menu.Item>
                                 </Menu.Group>
                             </Menu>

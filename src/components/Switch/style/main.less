@@ -1,0 +1,67 @@
+@import "~styles/var.less";
+.switch {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 22px;
+    min-width: 44px;
+    line-height: 20px;
+    vertical-align: middle;
+    border-radius: 20px;
+    border: 1px solid @G70;
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+    background: @G70;
+    &-inner {
+        color: @G20;
+        font-size: 14px;
+        margin-left: 24px;
+        margin-right: 6px;
+        display: block;
+    }
+    &:after {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        left: 1px;
+        top: 1px;
+
+        border-radius: 18px;
+        background-color: @G20;
+        content: "";
+        cursor: pointer;
+        transition: all .3s;
+    }
+    &:active:after {
+        width: 24px;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 2px fade(@G50, 20%);
+        outline: 0;
+    }
+    &-checked {
+        background-color: @B50;
+        border-color: @B50;
+        background-color: @B50;
+
+        .switch-inner {
+            margin-left: 6px;
+            margin-right: 24px;
+        }
+
+        &:after {
+            left: 100%;
+            margin-left: -19px;
+            }
+
+        &:active:after {
+            margin-left: -25px;
+        }
+        &:focus {
+            box-shadow: 0 0 0 2px fade(@B50, 20%);
+            outline: 0;
+        }
+    }
+}

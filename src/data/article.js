@@ -33,7 +33,7 @@ export function Get (id, page, limit) {
     })
 }
 
-export function update (id, data) {
+export function Put (id, data) {
     return new Promise((resolve, reject) => {
         axios.put('/api/article', {
             id: id,
@@ -48,7 +48,7 @@ export function update (id, data) {
     })
 }
 
-export function add (data) {
+export function Add (data) {
     return new Promise((resolve, reject) => {
         axios.post('/api/article', {
             data: data
@@ -62,7 +62,7 @@ export function add (data) {
     })
 }
 
-export function del (id) {
+export function Del (id) {
     return new Promise((resolve, reject) => {
         axios.delete('/api/article', {
             data: {

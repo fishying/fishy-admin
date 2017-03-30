@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { AddArticle } from 'components'
 import './style/main.less'
-import { Modal } from 'components'
+import { Modal, AddArticle } from 'components'
 import { GetAll } from 'data/article'
 import classNames from 'classnames'
 import moment from 'moment'
@@ -19,9 +18,11 @@ export default class List extends Component {
         super(props)
         this.articleList = this.articleList.bind(this)
         this.openSetting = this.openSetting.bind(this)
+        this.onUpdate = this.onUpdate.bind(this)
         this.state = {
             visible: false,
-            id: null
+            id: null,
+            openModal: false
         }
     }
 
@@ -30,6 +31,10 @@ export default class List extends Component {
             visible: true,
             id: id
         })
+    }
+
+    onUpdate () {
+        this.props.onUpdate()
     }
 
     articleList () {
@@ -82,9 +87,14 @@ export default class List extends Component {
     render () {
         const { id } = this.state
         return (
-            <article className="list">
+            <article className="list" ref="test">
                 { this.articleList() }
-                <AddArticle visible={this.state.visible} id={id} onClose={() => {this.setState({visible: false})}}/>
+                <Modal.View
+                    visible={this.state.visible}
+                    onOk={ () => { this.setState({openModal: true}) }}
+                >
+                    <AddArticle onUpdate={this.onUpdate} openModal={this.state.openModal} id={id} onClose={() => {this.setState({visible: false, openModal: false, id: null})}}/>
+                </Modal.View>
             </article>
         )
     }
