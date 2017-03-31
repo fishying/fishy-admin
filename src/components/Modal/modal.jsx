@@ -2,6 +2,7 @@ import React, { Component }from 'react'
 import ReactDOM from 'react-dom'
 import { RenderInBody } from '../index'
 import Animate from 'rc-animate'
+import classNames from 'classnames'
 import './style/main.less'
 
 const PropTypes = React.PropTypes
@@ -23,6 +24,9 @@ export default class Model extends Component {
         super(props)
         this.onClose = this.onClose.bind(this)
         this.onKeyClose = this.onKeyClose.bind(this)
+        this.state = {
+            visible: this.props.visible
+        }
     }
     /*
     componentDidUpdate () {
@@ -39,7 +43,11 @@ export default class Model extends Component {
             this.onClose()
         }
     }
-
+    componentWillReceiveProps (state) {
+        if (state.visible && this.props.visible !== state.visible) {
+            this.onOk()
+        }
+    }
     onClose () {
         this.props.onClose ? this.props.onClose() : () => {}
     }
@@ -49,21 +57,24 @@ export default class Model extends Component {
     }
 
     render () {
-        const { prefixCls, children, title, visible } = this.props
+        const { prefixCls, children, title, visible, className } = this.props
+        let classnames = classNames(prefixCls, className)
         let content
         if (visible) {
-            content = (<div className={prefixCls}>
-                <div onClick={this.onClose} className={`${prefixCls}-mask`}></div>
-                <div className={`${prefixCls}-wrap`}>
-                    <div className={`${prefixCls}-content thin-scroll`}>
-                        <div className={`${prefixCls}-header`}>
-                            <h2 className="title">{ title }</h2>
-                            <i onClick={this.onClose} className={`${prefixCls}-icon ion-android-close`}></i>
+            content = (
+                <div className={classnames}>
+                    <div onClick={this.onClose} className={`${prefixCls}-mask`}></div>
+                    <div className={`${prefixCls}-wrap`}>
+                        <div className={`${prefixCls}-content thin-scroll`}>
+                            <div className={`${prefixCls}-header`}>
+                                <h2 className="title">{ title }</h2>
+                                <i onClick={this.onClose} className={`${prefixCls}-icon ion-android-close`}></i>
+                            </div>
+                            { children }
                         </div>
-                        { children }
                     </div>
                 </div>
-            </div>)
+            )
         }
         return (
             <RenderInBody>

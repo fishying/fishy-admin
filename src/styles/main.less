@@ -134,6 +134,14 @@ input, select {
         h2.title {
             margin-right: @margin3;
         }
+        .add {
+            font-size: 14px;
+            color: @B50;
+            cursor: pointer;
+            i {
+                margin-right: 4px;
+            }
+        }
     }
 }
 .list-dian {
@@ -165,6 +173,23 @@ input, select {
     p.text {
         font-size: 32px;
         color: @G80;
+    }
+}
+.input {
+    height: 34px;
+    min-width: 76px;
+    padding: 9px 12px;
+    font-size: 14px;
+    color: inherit;
+    vertical-align: top;
+    background-color: @G20;
+    border: 1px solid @G50;
+    border-radius: 4px;
+    outline: 0;
+    transition: border 318ms;
+    resize: none;
+    &:focus {
+        border-color: @G70;
     }
 }
 .thin-scroll::-webkit-scrollbar {

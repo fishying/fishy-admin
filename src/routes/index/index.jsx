@@ -11,7 +11,6 @@ export default class react extends React.Component {
             meta: {},
             visible: false,
             openModal: false,
-
         }
     }
     componentDidMount () {
@@ -22,7 +21,7 @@ export default class react extends React.Component {
         GetAll()
             .then(e => {
                 this.setState({
-                    article: e.article,
+                    article: e.article ? e.article : [],
                     meta: e.meta
                 })
             })
@@ -49,7 +48,10 @@ export default class react extends React.Component {
                 <div className="card title">
                     <h2 className="title">文章</h2>
                     <p className="add">
-                        <Button onClick={() => {this.setState({visible: true})}}>新建文章</Button>
+                        <a onClick={() => {this.setState({visible: true})}}>
+                            <i className="icon ion-android-add"></i>
+                            新建文章
+                        </a>
                     </p>
                 </div>
                 <ArticleList onUpdate={() => this.GetAll()} article={article}/>

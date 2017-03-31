@@ -29,7 +29,7 @@
     &-content {
         height: 100%;
         width: 100%;
-        background: #fff;
+        background: @G30;
         box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.09);
         border-radius: 5px;
         overflow: auto;
@@ -44,7 +44,12 @@
     }
     &-icon.ion-android-close {
         cursor: pointer;
-        font-size: @h3;
+        font-size: @h3 + 4;
+        color: @G80;
+        transition: .3s color;
+        &:hover {
+            color: @B50;
+        }
     }
 }
 .confirm {

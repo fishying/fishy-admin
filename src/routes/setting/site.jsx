@@ -66,37 +66,53 @@ export default class Site extends Component {
                     <h2 className="title">网站设置</h2>
                 </div>
                 <div className="card site">
-                    <lable>
+                    <label>
                         <p className="title">网站图片：</p>
                         <input
                             type="text"
                             value={setting.get('cover')}
                             onChange={e => { this.handleChange(e.target.value, 'cover') }}
                         />
-                    </lable>
-                    <lable>
+                    </label>
+                    <label>
                         <p className="title">网站标题：</p>
                         <input
                             type="text"
                             value={setting.get('title')}
                             onChange={e => { this.handleChange(e.target.value, 'title') }}
                         />
-                    </lable>
-                    <lable>
+                    </label>
+                    <label>
+                        <p className="title">网站关键词：（SEO）</p>
+                        <input
+                            type="text"
+                            value={setting.get('keywords')}
+                            onChange={e => { this.handleChange(e.target.value, 'keywords') }}
+                        />
+                    </label>
+                    <label>
                         <p className="title">网站介绍：</p>
                         <textarea
                             value={setting.get('description')}
                             onChange={e => { this.handleChange(e.target.value, 'description') }}
                         />
-                    </lable>
-                    <lable>
+                    </label>
+                    <label>
                         <p className="title">网站logo：</p>
                         <input
                             type="text"
                             value={setting.get('logo')}
                             onChange={e => { this.handleChange(e.target.value, 'logo') }}
                         />
-                    </lable>
+                    </label>
+                    <label>
+                        <p className="title">网站url：</p>
+                        <input
+                            type="text"
+                            value={setting.get('url')}
+                            onChange={e => { this.handleChange(e.target.value, 'url') }}
+                        />
+                    </label>
                     <div className="btns">
                         <Button onClick={ putArticle }>更新</Button>
                     </div>
