@@ -32,12 +32,16 @@ export default class react extends React.Component {
 
     addArticle () {
         return (
-            <Modal.View
+            <AddArticle
+                onOk={() => { this.setState({openModal: true})}}
                 visible={this.state.visible}
-                onOk={ () => { this.setState({openModal: true}) }}
-            >
-                <AddArticle onUpdate={() => this.GetAll()} openModal={this.state.openModal} onClose={() => {this.setState({visible: false, openModal: false})}}/>
-            </Modal.View>
+                onUpdate={() => this.GetAll()}
+                onClose={() => {
+                    this.setState({
+                        visible: false
+                    })
+                }}
+            />
         )
     }
 

@@ -100,6 +100,7 @@ export default class AddArticle extends Component {
         })
     }
     delArticle () {
+        const { onClose } = this.props
         Modal.Conform({
             title:'删除文章',
             content:'是否确定删除文章？',
@@ -108,7 +109,8 @@ export default class AddArticle extends Component {
                     .then(msg => {
                         Notification.success(msg.message)
                         this.props.onUpdate()
-                        this.onClose()
+                        this.closeSetting()
+                        onClose()
                     })
                     .catch(msg => {
                         Notification.error(msg.message)
@@ -169,7 +171,7 @@ export default class AddArticle extends Component {
 
     saveArticle () {
         let { article, defaultTag } = this.state
-        let { id } = this.props
+        let { id, onClose } = this.props
         let tag = defaultTag
             .split(',')
             .map(e => e.replace(/\s/g, ''))
@@ -181,7 +183,7 @@ export default class AddArticle extends Component {
                 Put(this.props.id, this.state.article.toObject())
                     .then(msg => {
                         Notification.success(msg.message)
-                        this.onClose()
+                        onClose()
                     })
                     .catch(msg => {
                         Notification.error(msg.message)
@@ -190,7 +192,7 @@ export default class AddArticle extends Component {
                 Add(this.state.article.toObject())
                     .then(msg => {
                         Notification.success(msg.message)
-                        this.onClose()
+                        onClose()
                     })
                     .catch(msg => {
                         Notification.error(msg.message)
@@ -215,37 +217,43 @@ export default class AddArticle extends Component {
             </ul>
         )
         return (
-            <div className="article-post">
-                <div className="header">
-                    <div className="left">
-                        <i className="icon ion-ios-information-outline" onClick={() => this.setState({settingVis: true})}></i>
-                        <i className="icon ion-ios-cloud-upload-outline"></i>
-                    </div>
-                    <div className="article-info">
-                        <div className="info">
-                            <div className="tag">
-                                <i className="icon ion-ios-pricetag"></i>
-                                <input value={defaultTag} type="text" onChange={e => this.handleChange(e.target.value, 'defaultTag')} placeholder="用,隔开" className="text"/>
+            <Modal.View
+                visible={this.props.visible}
+                onOk={this.props.onOk}
+                afterClose={onClose}
+            >
+                <div className="article-post">
+                    <div className="header">
+                        <div className="left">
+                            <i className="icon ion-ios-information-outline" onClick={() => this.setState({settingVis: true})}></i>
+                            <i className="icon ion-ios-cloud-upload-outline"></i>
+                        </div>
+                        <div className="article-info">
+                            <div className="info">
+                                <div className="tag">
+                                    <i className="icon ion-ios-pricetag"></i>
+                                    <input value={defaultTag} type="text" onChange={e => this.handleChange(e.target.value, 'defaultTag')} placeholder="用,隔开" className="text"/>
+                                </div>
+                            </div>
+                            <div className="title">
+                                <input value={article.get('title')} type="text" onChange={e => this.handleChange(e.target.value, 'title')}  placeholder="文章标题"/>
                             </div>
                         </div>
-                        <div className="title">
-                            <input value={article.get('title')} type="text" onChange={e => this.handleChange(e.target.value, 'title')}  placeholder="文章标题"/>
+                        <div className="right">
+                            <Popover popup={ popup }>
+                                <i className="icon ion-android-more-horizontal"></i>
+                            </Popover>
+                            <i className="icon ion-android-close" onClick={this.props.onClose}></i>
                         </div>
                     </div>
-                    <div className="right">
-                        <Popover popup={ popup }>
-                            <i className="icon ion-android-more-horizontal"></i>
-                        </Popover>
-                        <i className="icon ion-android-close" onClick={onClose}></i>
+                    <div className="container">
+                        <div className="md">
+                            <textarea value={article.get('md')} onChange={e => this.handleChange(e.target.value, 'md')}  placeholder="文章内容" className="md thin-scroll" name="" id="" cols="30"></textarea>
+                        </div>
                     </div>
+                    { initSetting() }
                 </div>
-                <div className="container">
-                    <div className="md">
-                        <textarea value={article.get('md')} onChange={e => this.handleChange(e.target.value, 'md')}  placeholder="文章内容" className="md thin-scroll" name="" id="" cols="30"></textarea>
-                    </div>
-                </div>
-                { initSetting() }
-            </div>
+            </Modal.View>
         )
     }
 } 

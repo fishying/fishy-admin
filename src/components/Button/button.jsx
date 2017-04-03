@@ -16,14 +16,14 @@ class Button extends React.Component {
         super(props)
     }
     render () {
-        const {type, size, prefixCls, onClick} = this.props
+        const {type, size, prefixCls, onClick, style} = this.props
         const context = <span>{trim(this.props.children)}</span>
         const className = classnames(prefixCls, {
             [`${prefixCls}-${type}`]: type,
             [`${prefixCls}-${size}`]: size
         })
         return (
-            <button className={className} onClick={ onClick }>{context}</button>
+            <button style={style} className={className} onClick={ onClick }>{context}</button>
         )
     }
 }

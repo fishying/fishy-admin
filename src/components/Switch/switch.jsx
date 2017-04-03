@@ -1,8 +1,6 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import './style/main.less'
-const PropTypes = React.PropTypes
-const Component = React.Component
 function noop () {}
 export default class Switch extends Component {
     static propTypes = {

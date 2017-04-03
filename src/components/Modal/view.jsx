@@ -1,17 +1,17 @@
-import React, { Component }from 'react'
+import React, { Component, PropTypes }from 'react'
 import ReactDOM from 'react-dom'
 import { RenderInBody } from '../index'
 import Animate from 'rc-animate'
 import './style/main.less'
 import classNames from 'classnames'
 
-const PropTypes = React.PropTypes
 export default class Model extends Component {
     static propTypes = {
         prefixCls: PropTypes.string,
         visible: PropTypes.bool,
         onClose: PropTypes.func,
-        onOk: PropTypes.func
+        onOk: PropTypes.func,
+        afterClose: PropTypes.func
     }
 
     static defaultProps = {
@@ -23,6 +23,7 @@ export default class Model extends Component {
         super(props)
         this.onClose = this.onClose.bind(this)
         this.onKeyClose = this.onKeyClose.bind(this)
+        this.afterClose = this.afterClose.bind(this)
         this.state = {
             visible: this.props.visible
         }
@@ -45,6 +46,11 @@ export default class Model extends Component {
     onKeyClose (e) {
         if (e.keyCode && e.keyCode === 27 ) {
             this.onClose()
+        }
+    }
+    afterClose () {
+        if (!this.props.visible) {
+            this.props.afterClose ? this.props.afterClose() : () => {}
         }
     }
     onClose () {
@@ -75,6 +81,7 @@ export default class Model extends Component {
                 <Animate
                     component="div"
                     transitionName={'model-view'}
+                    onEnd={this.afterClose}
                 >
                     { content }
                 </Animate>

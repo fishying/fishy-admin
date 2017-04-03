@@ -33,9 +33,11 @@ module.exports = {
                 exclude: /node_modules/,
                 include: projectRoot,
                 loader: 'eslint',
-            }
+            },
+            // { test: /\.js$/, loader: "source-map-loader" }
         ],
         loaders: [
+            // { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,

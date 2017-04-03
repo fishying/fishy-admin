@@ -28,7 +28,7 @@ export function Get (id) {
     })
 }
 
-export function update (id, data) {
+export function Put (id, data) {
     return new Promise((resolve, reject) => {
         axios.put('/api/tag', {
             id: id,

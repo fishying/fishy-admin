@@ -1,6 +1,6 @@
 import React from 'react'
 import { Map } from 'immutable'
-import { Button } from 'components'
+import { Button, Input } from 'components'
 import { Get, Put } from 'data/user'
 import './style/site.less'
 
@@ -8,6 +8,7 @@ const userDefault = {
     avatar: '',
     cover: '',
     email: '',
+    description: '',
     website: ''
 }
 
@@ -20,7 +21,7 @@ export default class Site extends Component {
         this.putArticle = this.putArticle.bind(this)
 
         this.state = {
-            user: Map({...userDefault})
+            user: Map(userDefault)
         }
     }
     componentWillMount () {
@@ -31,7 +32,7 @@ export default class Site extends Component {
                     user[type] = msg.user[type] === null ? '' : msg.user[type]
                 })
                 this.setState({
-                    user: Map({...user})
+                    user: Map(user)
                 })
             })
     }
@@ -64,29 +65,41 @@ export default class Site extends Component {
                     <h2 className="title">管理员设置</h2>
                 </div>
                 <div className="card site">
-                    <label>
-                        <p className="title">管理员头像：</p>
-                        <input
+                    <label className="input">
+                        <span className="title">头像:</span>
+                        <Input
+                            className="input"
                             type="text"
                             value={user.get('avatar')}
                             onChange={e => { this.handleChange(e.target.value, 'avatar') }}
                         />
                     </label>
-                    <label>
-                        <p className="title">管理员图片：</p>
-                        <input
+                    <label className="input">
+                        <span className="title">头图:</span>
+                        <Input
+                            className="input"
                             type="text"
                             value={user.get('cover')}
                             onChange={e => { this.handleChange(e.target.value, 'cover') }}
                         />
                     </label>
-                    <label>
-                        <p className="title">管理员图片：</p>
-                        <input type="text"/>
+                    <label className="input">
+                        <span className="title">介绍:</span>
+                        <Input
+                            className="input"
+                            type="text"
+                            value={user.get('description')}
+                            onChange={e => { this.handleChange(e.target.value, 'description') }}
+                        />
                     </label>
-                    <label>
-                        <p className="title">管理员介绍：</p>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <label className="input">
+                        <span className="title">站点:</span>
+                        <Input
+                            className="input"
+                            type="text"
+                            value={user.get('website')}
+                            onChange={e => { this.handleChange(e.target.value, 'website') }}
+                        />
                     </label>
                     <div className="btns">
                         <Button>更新</Button>

@@ -1,18 +1,18 @@
-import React, { Component }from 'react'
+import React, { Component, PropTypes }from 'react'
 import ReactDOM from 'react-dom'
 import { RenderInBody } from '../index'
 import Animate from 'rc-animate'
 import classNames from 'classnames'
 import './style/main.less'
 
-const PropTypes = React.PropTypes
 export default class Model extends Component {
     static propTypes = {
         prefixCls: PropTypes.string,
         title: PropTypes.string,
         visible: PropTypes.bool,
         onClose: PropTypes.func,
-        onOk: PropTypes.func
+        onOk: PropTypes.func,
+        afterClose: PropTypes.func,
     }
 
     static defaultProps = {
@@ -24,6 +24,7 @@ export default class Model extends Component {
         super(props)
         this.onClose = this.onClose.bind(this)
         this.onKeyClose = this.onKeyClose.bind(this)
+        this.afterClose = this.afterClose.bind(this)
         this.state = {
             visible: this.props.visible
         }
@@ -50,6 +51,12 @@ export default class Model extends Component {
     }
     onClose () {
         this.props.onClose ? this.props.onClose() : () => {}
+    }
+
+    afterClose () {
+        if (!this.props.visible) {
+            this.props.afterClose ? this.props.afterClose() : () => {}
+        }
     }
 
     onOk () {
@@ -81,6 +88,7 @@ export default class Model extends Component {
                 <Animate
                     component="div"
                     transitionName={'model'}
+                    onEnd={this.afterClose}
                 >
                     { content }
                 </Animate>

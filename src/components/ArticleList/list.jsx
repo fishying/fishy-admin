@@ -89,12 +89,14 @@ export default class List extends Component {
         return (
             <article className="list" ref="test">
                 { this.articleList() }
-                <Modal.View
+                <AddArticle
                     visible={this.state.visible}
+                    onUpdate={this.onUpdate}
                     onOk={ () => { this.setState({openModal: true}) }}
-                >
-                    <AddArticle onUpdate={this.onUpdate} openModal={this.state.openModal} id={id} onClose={() => {this.setState({visible: false, openModal: false, id: null})}}/>
-                </Modal.View>
+                    openModal={this.state.openModal}
+                    id={id}
+                    onClose={() => {this.setState({visible: false, openModal: false, id: null})}}
+                />
             </article>
         )
     }
