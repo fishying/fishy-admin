@@ -1,5 +1,5 @@
 import axios from './index'
-export function index (page, limit) {
+export function GetAll (page, limit) {
     return new Promise((resolve, reject) => {
         axios.get('/api/tag', {
             params: {
@@ -16,7 +16,7 @@ export function index (page, limit) {
     })
 }
 
-export function one (id) {
+export function Get (id) {
     return new Promise((resolve, reject) => {
         axios.get(`/api/tag/${id}`)
             .then(data => {
@@ -28,7 +28,7 @@ export function one (id) {
     })
 }
 
-export function update (id, data) {
+export function Put (id, data) {
     return new Promise((resolve, reject) => {
         axios.put('/api/tag', {
             id: id,

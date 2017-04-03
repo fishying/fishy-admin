@@ -1,0 +1,172 @@
+@import "~styles/var.less";
+
+.article-post {
+    max-width: 620px;
+    padding: 0 @margin3;
+    margin: @margin3 auto 0 auto;
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        & .left, & .right {
+            position: absolute;
+            top: @margin3;
+            .icon {
+                cursor: pointer;
+                color: @G90;
+            }
+        }
+        & .left {
+            left: @margin3;
+            .icon {
+                margin-right: @margin3;
+                font-size: 22px;
+            }
+        }
+        & .right {
+            right: @margin3;
+            .icon {
+                margin-left: @margin3;
+                font-size: 22px;
+            }
+        }
+        .article-info {
+            max-width: 620px;
+            padding: 60px 16px 0 16px;
+            margin: 0 auto 0 auto;
+            background: #fff;
+            .info {
+                border-bottom: 1px solid @G30;
+                padding: @margin1 0;
+                .tag {
+                    line-height: 24px;
+                    .icon {
+                        color: @G90;
+                    }
+                    input[type=text] {
+                        line-height: 24px;
+                        border: none;
+                        outline: none;
+                        margin-left: 12px;
+                    }
+                }
+            }
+            .title {
+                margin-top: @margin2;
+                padding: @margin2 0;
+                input[type=text] {
+                    font-size: @h2;
+                    outline: none;
+                    width: 100%;
+                    border: none;
+                    color: @G100;
+                }
+            }
+        }
+    }
+    .container {
+        margin-top: 140px;
+        .cover {
+            width: 100%;
+            min-height:120px;
+            background: @G30;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .title {
+            margin-top: @margin3;
+            input[type=text] {
+                font-size: @h2 * 1.5;
+                outline: none;
+                width: 100%;
+                border: none;
+                color: @G100;
+            }
+        }
+        .md {
+            margin-top: @margin3;
+            textarea {
+                min-width: 100%;
+                max-width: 100%;
+                min-height: 440px;
+                border: none;
+                outline: none;
+                color: @G100;
+            }
+        }
+        .editor-toolbar {
+            margin-top: @margin3;
+            border: none;
+            a {
+                &:hover, &:active {
+                    border: none;
+                    background: @G80
+                }
+            }
+        }
+        .CodeMirror {
+            border: none;
+            cursor: text;
+            padding: 0;
+            &-scroll {
+                min-height: 800px;
+            }
+        }
+    }
+}
+.modal-view.modal-article-info {
+    background: rgba(255, 255, 255, 0.94);
+    .article-info {
+        width: 440px;
+        margin: auto;
+        header {
+            width: 100%;
+            margin: 24px auto;
+            margin-bottom: 42px;
+            padding-bottom: 24px;
+            text-align: center;
+            border-bottom: 1px solid @G50;
+            .icon {
+                font-size: 5em;
+                color: @G80;
+            }
+            p.title {
+                font-size: 2.4em;
+                color: @G90;
+            }
+        }
+        .content {
+            margin-bottom: @margin6;
+            .list {
+                line-height: 24px;
+                margin-bottom: 24px;
+                display: flex;
+                align-items: center;
+                .lab {
+                    flex: 0 1 140px;
+                    color: @G90;
+                    font-size: 1.4em;
+                }
+                .info {
+                    flex: 1 1 auto;
+                    font-size: 1.4em;
+                    input[type=text] {
+                        border: 1px solid @G70;
+                        border-radius: @margin1;
+                        outline: none;
+                        padding: .6em .8em;
+                    }
+                }
+            }
+        }
+        .btn-group {
+            text-align: center;
+            button {
+                font-size: 1.2em;
+                margin: 0 @margin2;
+            }
+        }
+    }
+}

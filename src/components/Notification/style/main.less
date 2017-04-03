@@ -1,0 +1,69 @@
+@import "~styles/var.less";
+
+.notification {
+    position: fixed;
+    z-index: 99999999999;
+    &-notify {
+        width: 300px;
+        padding: @margin3;
+        background: #fff;
+        box-shadow: 0 0px 12px 0 rgba(0, 0, 0, 0.05);
+        border-radius: @margin1 - 2;
+        border-left: @margin1 solid;
+        margin-bottom: @margin3;
+        position: relative;
+    }
+    &-icon {
+        position: absolute;
+        i {
+            font-size: @h2;
+            line-height: 24px;
+        }
+    }
+    &-icon-close {
+        cursor: pointer;
+        position: absolute;
+        right: @margin3;
+        top: @margin3;
+        i {
+            font-size: @h2;
+            line-height: 24px;
+            color: @G80;
+        }
+    }
+    &-content {
+        margin: 0 32px;
+        h2 {
+            font-size: @h3;
+            line-height: 24px;
+            font-weight: 400;
+        }
+    }
+    &-info &-icon {
+        color: @B50
+    }
+    &-success &-icon {
+        color: @GN50
+    }
+    &-warning &-icon {
+        color: @A50
+    }
+    &-error &-icon {
+        color: @R50
+    }
+    &-info {
+        border-color: @B50;
+    }
+    &-success {
+        border-color: @GN50;
+    }
+    &-warning {
+        border-color: @A50;
+    }
+    &-error {
+        border-color: @R50;
+    }
+    &-notify:last-child {
+        margin-bottom: 0;
+    }
+}

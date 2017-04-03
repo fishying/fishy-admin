@@ -1,0 +1,58 @@
+@import "~styles/var.less";
+.menu {
+    li {
+        list-style-type: none;
+    }
+    .menu-group {
+        .menu-group-title {
+            padding: 0 @margin3 @margin3 @margin3;
+            position: relative;
+            color: @G90;
+        }
+        .menu {
+            .menu-item {
+                a {
+                    padding: @margin2 @margin3 @margin2 @margin3 + @margin2;
+                }
+            }
+        }
+    }
+    .menu-item {
+        color: @G80;
+        position: relative;
+        a {
+            display: block;
+            color: @G80;
+            padding: @margin2 @margin3;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: background 318ms;
+            &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 24px;
+                width: 5px;
+                height: 5px;
+                margin-top: -2.5px;
+                background: @G80;
+                border-radius: 50%;
+                opacity: 0;
+                transition: transform 418ms, opacity 318ms;
+                transform: translate3d(25px,0,0);
+            }
+            &:hover {
+                background: fade(@G30, 60%);
+            }
+        }
+        &.menu-item-active {
+            background: fade(@G30, 60%);
+            a:after {
+                transform: translate3d(0,0,0);
+                opacity: 1;
+            }
+        }
+    }
+}

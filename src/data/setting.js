@@ -1,6 +1,6 @@
 import axios from './index'
 
-export function all () {
+export function Get () {
     return new Promise((resolve, reject) => {
         axios.get('/api/setting')
             .then(data => {
@@ -12,7 +12,7 @@ export function all () {
     })
 }
 
-export function update (id, data) {
+export function Put (id, data) {
     return new Promise((resolve, reject) => {
         axios.put('/api/setting', {
             id: id,

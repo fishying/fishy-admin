@@ -1,0 +1,32 @@
+@import "~styles/var.less";
+
+.site {
+    margin-top: @margin3;
+    padding: @margin3;
+    display: flex;
+    flex-direction: column;
+    label {
+        margin-bottom: @margin3;
+        p.title {
+            margin-bottom: @margin1;
+            coolor: @G90;
+            font-size: 16px;
+        }
+        input, textarea {
+            border: 1px solid @G70;
+            padding: @margin1 @margin2;
+            outline: none;
+            border-radius: @margin1;
+            font-size: 16px;
+            max-width: 300px;
+            min-width: 300px;
+            color: @G90;
+        }
+        textarea {
+            height: 100px;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

@@ -1,0 +1,48 @@
+@import "~styles/var.less";
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    &.layout-has-sider {
+        width: 900px;
+        margin: 0 auto;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 0 @margin3;
+    }
+}
+.layout-content {
+    flex: auto;
+    position: relative;
+    > div {
+        position: relative;
+        > div {
+            position: absolute;
+            width: 100%;
+        }
+    }
+}
+.layout-header {
+    position: relative;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    min-height: 48px;
+    background-color: rgba(255,255,255,.95);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.05);
+    margin-bottom: @margin4;
+    padding: 0 @margin3;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    & .logo {
+        font-size: @h1;
+        font-weight: 700;
+        height: 100%;
+        color: @G100;
+    }
+}
+.layout-sider {
+    flex: 0 0 240px;
+}

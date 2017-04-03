@@ -1,7 +1,7 @@
-var path = require('path');
-var config = require('../config');
-var utils = require('./utils');
-var projectRoot = path.resolve(__dirname, '../');
+var path = require('path')
+var config = require('../config')
+var utils = require('./utils')
+var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
     entry: [
@@ -19,7 +19,8 @@ module.exports = {
             'src': path.resolve(__dirname, '../src'),
             'assets': path.resolve(__dirname, '../src/assets'),
             'components': path.resolve(__dirname, '../src/components'),
-            'data': path.resolve(__dirname, '../src/data')
+            'data': path.resolve(__dirname, '../src/data'),
+            'styles': path.resolve(__dirname, '../src/styles')
         }
     },
     resolveLoader: {
@@ -32,9 +33,11 @@ module.exports = {
                 exclude: /node_modules/,
                 include: projectRoot,
                 loader: 'eslint',
-            }
+            },
+            // { test: /\.js$/, loader: "source-map-loader" }
         ],
         loaders: [
+            // { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
@@ -57,8 +60,8 @@ module.exports = {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url',
                 query: {
-                  limit: 10000,
-                  name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+                    limit: 10000,
+                    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
                 }
             },
             {
