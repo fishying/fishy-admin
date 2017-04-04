@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input } from 'components'
+import { Button, Input, Notification } from 'components'
 import './style/site.less'
 import { Map } from 'immutable'
 import { Get, Put } from 'data/setting'
@@ -41,7 +41,10 @@ export default class Site extends Component {
         const { setting } = this.state
         Put(setting.get('_id'), setting.toObject())
             .then(msg => {
-                console.log(msg)
+                Notification.success(msg.message)
+            })
+            .catch(msg => {
+                Notification.error(msg.message)
             })
     }
 

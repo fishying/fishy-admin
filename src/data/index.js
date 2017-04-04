@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {message} from 'antd'
+import { Notification } from 'components'
 axios.defaults.validateStatus = function () {
     return true
 }
@@ -7,7 +7,7 @@ axios.interceptors.response.use(function (config) {
     if (config.status >= 400 && config.status !== 404) {
         return Promise.reject(config.data)
     } else if (config.status === 404) {
-        message.warn('获取数据失败，请刷新重试！', 5000)
+        Notification.error('获取数据失败，请刷新重试！')
     } else if (config.status === 401) {
         location.href = '/'
     } else {
