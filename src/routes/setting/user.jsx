@@ -1,12 +1,14 @@
 import React from 'react'
 import { Map } from 'immutable'
-import { Button, Input } from 'components'
+import { Button, Input, Notification } from 'components'
 import { Get, Put } from 'data/user'
 import './style/site.less'
 
 const userDefault = {
-    avatar: '',
+    name: '',
+    slug: '',
     cover: '',
+    avatar: '',
     email: '',
     description: '',
     website: ''
@@ -39,9 +41,12 @@ export default class Site extends Component {
 
     putArticle () {
         const { user } = this.state
-        Put(user.get('_id'), user.toObject())
+        Put(user.toObject())
             .then(msg => {
-                console.log(msg)
+                Notification.success(msg.message)
+            })
+            .catch(msg => {
+                Notification.error(msg.message)
             })
     }
 
@@ -65,6 +70,24 @@ export default class Site extends Component {
                     <h2 className="title">管理员设置</h2>
                 </div>
                 <div className="card site">
+                    <label className="input">
+                        <span className="title">名称:</span>
+                        <Input
+                            className="input"
+                            type="text"
+                            value={user.get('name')}
+                            onChange={e => { this.handleChange(e.target.value, 'name') }}
+                        />
+                    </label>
+                    <label className="input">
+                        <span className="title">slug:</span>
+                        <Input
+                            className="input"
+                            type="text"
+                            value={user.get('slug')}
+                            onChange={e => { this.handleChange(e.target.value, 'slug') }}
+                        />
+                    </label>
                     <label className="input">
                         <span className="title">头像:</span>
                         <Input
@@ -102,7 +125,7 @@ export default class Site extends Component {
                         />
                     </label>
                     <div className="btns">
-                        <Button>更新</Button>
+                        <Button onClick={putArticle}>更新</Button>
                     </div>
                 </div>
             </div>
