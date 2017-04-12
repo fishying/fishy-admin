@@ -61,6 +61,7 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-update": "^15.4.2",
     "react-dom": "^15.3.1",
+    "react-dragula": "^1.1.17",
     "react-router-transition": "^0.0.6",
     "react-simplemde-editor": "^3.6.10",
     "react-transform-hmr": "^1.0.4",

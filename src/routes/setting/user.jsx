@@ -1,5 +1,7 @@
 import React from 'react'
+import * as ReactDOM from 'react-dom'
 import { Map } from 'immutable'
+import Dragula from 'react-dragula'
 import { Button, Input, Notification } from 'components'
 import { Get, Put } from 'data/user'
 import './style/site.less'
@@ -21,9 +23,16 @@ export default class Site extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.putArticle = this.putArticle.bind(this)
+        this.dragulaDecorator = this.dragulaDecorator.bind(this)
 
         this.state = {
             user: Map(userDefault)
+        }
+    }
+    dragulaDecorator = (componentBackingInstance) => {
+        if (componentBackingInstance) {
+            let options = { }
+            Dragula([componentBackingInstance], options)
         }
     }
     componentWillMount () {
@@ -124,6 +133,15 @@ export default class Site extends Component {
                             onChange={e => { this.handleChange(e.target.value, 'website') }}
                         />
                     </label>
+                    <div className="nav" ref={this.dragulaDecorator}>
+                        <div className="list">Swap me around</div>
+                        <div className="list">Swap her around</div>
+                        <div className="list">Swap him around</div>
+                        <div className="list">Swap them around</div>
+                        <div className="list">Swap us around</div>
+                        <div className="list">Swap things around</div>
+                        <div className="list">Swap everything around</div>
+                    </div>
                     <div className="btns">
                         <Button onClick={putArticle}>更新</Button>
                     </div>
