@@ -30,26 +30,52 @@
     }
     .nav {
         .list {
-            border: 1px solid @G70;
-            padding: @margin3;
-            margin-bottom: @margin2;
+            margin-top: @margin3;
+            border-radius: @margin2;
             cursor: pointer;
             cursor: -webkit-grab;
+            display: flex;
+            &.add {
+                cursor: auto;
+            }
+            input {
+                flex-grow: 1;
+                &:first-child {
+                    margin-right: @margin2;
+                }
+            }
+            .icon {
+                font-size: 24px;
+                margin: 0 @margin3;
+                color: @R30;
+            }
             &.gu-transit {
-                border: 1px solid @G50;
             }
         }
     }
 }
 .gu-mirror {
-    border: 1px solid @G70;
-    padding: @margin3;
     position: fixed !important;
     margin: 0 !important;
     z-index: 9999 !important;
+    border-radius: @margin2;
+    cursor: pointer;
+    cursor: -webkit-grab;
+    display: flex;
     opacity: 0.8;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
+    input {
+        flex-grow: 1;
+        &:first-child {
+            margin-right: @margin2;
+        }
+    }
+    .icon {
+        font-size: 24px;
+        margin: 0 @margin3;
+        color: @R30;
+    }
+    &.gu-transit {
+    }
 }
 .gu-hide {
   display: none !important;

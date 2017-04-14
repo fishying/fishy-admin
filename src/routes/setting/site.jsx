@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Button, Input, Notification } from 'components'
 import './style/site.less'
+import Dragula from 'react-dragula'
 import { Map } from 'immutable'
 import { Get, Put } from 'data/setting'
-
+import Nav from './nav'
 const settingDefault = {
     cover: '',
     description: '',
@@ -19,9 +20,16 @@ export default class Site extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.putArticle = this.putArticle.bind(this)
+        this.dragulaDecorator = this.dragulaDecorator.bind(this)
 
         this.state = {
             setting: Map(settingDefault)
+        }
+    }
+    dragulaDecorator = (componentBackingInstance) => {
+        if (componentBackingInstance) {
+            let options = { }
+            Dragula([componentBackingInstance], options)
         }
     }
     componentWillMount () {
@@ -125,6 +133,7 @@ export default class Site extends Component {
                     <div className="btns">
                         <Button onClick={ putArticle }>更新</Button>
                     </div>
+                    <Nav nav={setting.get('navigation')} onChange={(data) => {this.setState({setting:setting.set('navigation', data)})}}></Nav>
                 </div>
             </div>
         )
