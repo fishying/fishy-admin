@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Dragula from 'react-dragula'
 import Sortable from 'sortablejs'
-import { List } from 'immutable'
+import { List, Map } from 'immutable'
 import { Input } from 'components'
 
 export default class Nav extends Component {
@@ -40,39 +40,35 @@ export default class Nav extends Component {
         }
     }
     addArr () {
-        console.log(this.state.nav)
         this.setState({
             nav: this.state.nav.push({name: this.refs.name.value, url: this.refs.url.value})
         }, () => {
             this.props.onChange(this.state.nav.toArray())
         })
     }
-
     handleChange (e, index, type) {
-        if (type === 'defaultTag') {
-            this.setState({
-                nav: e
-            })
-        } else {
-            this.setState({
-                setting: this.state.setting.set(type, e)
-            })
-        }
+        let data = this.state.nav.get(index)
+        data[type] = e
+        this.setState({
+            nav: this.state.nav.set(index, this.state.nav.get(index))
+        })
     }
     listRender () {
-        return this.props.nav.map((list, i) => {
+        console.log(1)
+        return this.state.nav.map((list, i) => {
             return (
                 <div key={list.name} className="list t">
                     <Input
                         value={list.name}
                         className="input"
                         type="text"
-                        onChange={e => {console.log(e)}}
+                        onChange={e => {this.handleChange(e.target.value, i, 'name')}}
                     />
                     <Input
                         value={list.url}
                         className="input"
                         type="text"
+                        onChange={e => {this.handleChange(e.target.value, i, 'url')}}
                     />
                     <i className="icon ion-trash-b"></i>
                 </div>
