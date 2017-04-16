@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Notification } from 'components'
+import { Button, Input, Notification, Modal } from 'components'
 import './style/site.less'
 import Dragula from 'react-dragula'
 import { Map } from 'immutable'
@@ -21,9 +21,12 @@ export default class Site extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.putArticle = this.putArticle.bind(this)
         this.dragulaDecorator = this.dragulaDecorator.bind(this)
+        this.renderModal = this.renderModal.bind(this)
+        this.handleNavChange = this.handleNavChange.bind(this)
 
         this.state = {
-            setting: Map(settingDefault)
+            setting: Map(settingDefault),
+            navVis: false
         }
     }
     dragulaDecorator = (componentBackingInstance) => {
@@ -56,6 +59,15 @@ export default class Site extends Component {
             })
     }
 
+    handleNavChange (data) {
+        console.log(data)
+        this.setState({
+            setting: this.state.setting.set('navigation', data)
+        }, () => {
+            console.log(this.state.setting.toObject())
+        })
+    }
+
     handleChange (e, type) {
         if (type === 'defaultTag') {
             this.setState({
@@ -67,6 +79,23 @@ export default class Site extends Component {
             })
         }
     }
+    renderModal () {
+        const { navVis, setting } = this.state
+        return (
+            <Modal
+                visible={navVis}
+                title="设置nav"
+                className="setting-nav-modal"
+                onClose={() => {this.setState({navVis: false})}}
+            >
+                <Nav
+                    nav={setting.get('navigation')}
+                    onClose={() => {this.setState({navVis: false})}}
+                    onChange={this.handleNavChange}
+                />
+            </Modal>
+        )
+    }
 
     render () {
         const { setting } = this.state
@@ -75,6 +104,11 @@ export default class Site extends Component {
             <div>
                 <div className="card title">
                     <h2 className="title">网站设置</h2>
+                    <p className="add">
+                        <a onClick={() => {this.setState({navVis: true})}}>
+                            设置navigation
+                        </a>
+                    </p>
                 </div>
                 <div className="card site">
                     <label className="input">
@@ -133,8 +167,8 @@ export default class Site extends Component {
                     <div className="btns">
                         <Button onClick={ putArticle }>更新</Button>
                     </div>
-                    <Nav nav={setting.get('navigation')} onChange={(data) => {this.setState({setting:setting.set('navigation', data)})}}></Nav>
                 </div>
+                { this.renderModal() }
             </div>
         )
     }

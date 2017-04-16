@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SimpleMDE from 'react-simplemde-editor'
+// import SimpleMDE from 'simplemde'
 import './style/main.less'
 import { Button, Modal, Popover, Switch, Notification } from 'components'
 import { Get, Put, Add, Del } from 'data/article'
@@ -36,6 +36,7 @@ export default class AddArticle extends Component {
         this.onClose = this.onClose.bind(this)
         this.saveArticle = this.saveArticle.bind(this)
         this.delArticle = this.delArticle.bind(this)
+        // this.simpleMDEDecorator = this.simpleMDEDecorator.bind(this)
 
         this.state = {
             settingVis: false,
@@ -51,7 +52,18 @@ export default class AddArticle extends Component {
             this.getArticle()
         }
     }
-    
+    /*
+    simpleMDEDecorator = (componentBackingInstance) => {
+        if (componentBackingInstance) {
+            let options = {
+                element: componentBackingInstance,
+                status: false,
+                toolbar: false
+            }
+            let simplemde = new SimpleMDE(options)
+        }
+    }
+    */
     getArticle () {
         this.setState({
             articleOpen: true
@@ -227,6 +239,7 @@ export default class AddArticle extends Component {
                         <div className="left">
                             <i className="icon ion-ios-information-outline" onClick={() => this.setState({settingVis: true})}></i>
                             <i className="icon ion-ios-cloud-upload-outline"></i>
+                            <a href="https://stackedit.io/editor" target="_blank"><i className="icon ion-social-markdown"></i></a>
                         </div>
                         <div className="article-info">
                             <div className="info">
