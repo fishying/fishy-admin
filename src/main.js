@@ -12,7 +12,7 @@ import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-ro
 
 import './styles/main.less'
 let h
-if (process.env.NODE_ENV) {
+if (process.env.NODE_ENV === 'production' ) {
     h = browserHistory
 } else {
     h = hashHistory
