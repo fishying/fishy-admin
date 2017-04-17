@@ -8,12 +8,17 @@ import Tag from './routes/tag'
 import Site from './routes/setting/site.jsx'
 import User from './routes/setting/user.jsx'
 
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router'
 
 import './styles/main.less'
-
+let h
+if (process.env.NODE_ENV) {
+    h = browserHistory
+} else {
+    h = hashHistory
+}
 ReactDOM.render((
-    <Router history={browserHistory}>
+    <Router history={h}>
         <Route path="/" component={Default}>
         <IndexRoute name="文章" component={Index}/>
             <Route path="tag" name="标签" component={Tag}/>
