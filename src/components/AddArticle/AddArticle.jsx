@@ -11,10 +11,13 @@ const PropTypes = React.PropTypes
 const defaultArticle = {
     content: '',
     tag: '',
+    slug: '',
     md: '',
     enabled: false,
     title: '',
-    cover: ''
+    cover: '',
+    page: false,
+    ismd: true
 }
 export default class AddArticle extends Component {
     static propTypes = {
@@ -155,6 +158,12 @@ export default class AddArticle extends Component {
                             <div className="info">{ moment(article.get('update_at')).format('lll') }</div>
                         </div>
                         <div className="list">
+                            <div className="lab">Slug：</div>
+                            <div className="info">
+                                <input type="text" value={article.get('slug')} onChange={e => this.handleChange(e.target.value, 'slug')}/>
+                            </div>
+                        </div>
+                        <div className="list">
                             <div className="lab">文章封面图：</div>
                             <div className="info">
                                 <input type="text" value={article.get('cover')} onChange={e => this.handleChange(e.target.value, 'cover')}/>
@@ -166,6 +175,24 @@ export default class AddArticle extends Component {
                                 <Switch
                                     defaultChecked={article.get('enabled')}
                                     onChange={e => this.handleChange(e, 'enabled')}
+                                />
+                                </div>
+                        </div>
+                        <div className="list">
+                            <div className="lab">是否为md：</div>
+                            <div className="info">
+                                <Switch
+                                    defaultChecked={article.get('ismd')}
+                                    onChange={e => this.handleChange(e, 'ismd')}
+                                />
+                                </div>
+                        </div>
+                        <div className="list">
+                            <div className="lab">是否为page：</div>
+                            <div className="info">
+                                <Switch
+                                    defaultChecked={article.get('page')}
+                                    onChange={e => this.handleChange(e, 'page')}
                                 />
                                 </div>
                         </div>

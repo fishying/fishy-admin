@@ -36,9 +36,8 @@ export default class Nav extends Component {
         // check if backing instance not null
         if (componentBackingInstance) {
             let options = {
-                animation: 150,
-                handle: '.list.t',
-                filter: '.icon, input',
+                animation: 100,
+                handle: '.drag-handle',
                 onEnd: (e) => {
                     this.handleMove(e)
                 }
@@ -75,17 +74,19 @@ export default class Nav extends Component {
             return (
                 <div key={list.get('key')} className="list t" draggable="true">
                     <span className="drag-handle">☰</span>
-                    <Input
-                        value={list.get('name')}
-                        className="input"
-                        onChange={e => {this.handleChange(e.target.value, i, 'name')}}
-                    />
-                    <Input
-                        value={list.get('url')}
-                        className="input"
-                        onChange={e => {this.handleChange(e.target.value, i, 'url')}}
-                    />
-                    <i className="icon ion-android-close" onClick={() => {this.delArr(i)}}></i>
+                    <span className="inputs" style={{ display: 'flex', flexGrow: 2 }}>
+                        <Input
+                            value={list.get('name')}
+                            className="input"
+                            onChange={e => {this.handleChange(e.target.value, i, 'name')}}
+                        />
+                        <Input
+                            value={list.get('url')}
+                            className="input"
+                            onChange={e => {this.handleChange(e.target.value, i, 'url')}}
+                        />
+                        <i className="icon ion-android-close" onClick={() => {this.delArr(i)}}></i>
+                    </span>
                 </div>
             )
         })
@@ -98,7 +99,7 @@ export default class Nav extends Component {
     render () {
         return (
             <div className="nav">  
-                <div ref={this.sortableContainersDecorator}>
+                <div className="nav-list" ref={this.sortableContainersDecorator}>
                     {this.listRender()}
                 </div>
                 <div className="list add">
